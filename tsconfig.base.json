@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "sourceMap": true,
+    "noEmit": true,
+    "strict": true,
+    "declaration": true,
+    "declarationMap": true,
+    "skipLibCheck": true,
+    "stripInternal": true,
+    "skipDefaultLibCheck": true,
+    "useDefineForClassFields": false
+  },
+  "files": []
+}

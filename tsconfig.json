@@ -1,0 +1,31 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "target": "ES2022",
+    "lib": ["ES2022"],
+    "esModuleInterop": true,
+    "incremental": true,
+    "outDir": "dist",
+    "tsBuildInfoFile": "./dist/.tsbuildinfo",
+    "paths": {
+      "@lib": ["../src/index"],
+      "@utils": ["../src/utils"],
+      "@error": ["../src/errors/error"]
+    },
+
+    "sourceMap": true,
+    "noEmit": true,
+    "strict": true,
+    "declaration": true,
+    "declarationMap": true,
+    "skipLibCheck": true,
+    "stripInternal": true,
+    "skipDefaultLibCheck": true,
+    "useDefineForClassFields": false
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["**/dist", "**/node_modules"]
+}

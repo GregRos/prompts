@@ -1,0 +1,14 @@
+{
+  "name": "@gregros/prompts",
+  "packageManager": "yarn@4.9.1",
+  "devDependencies": {
+    "@types/node": "^24.9.2",
+    "typescript": "^5.9.3"
+  },
+  "dependencies": {
+    "@types/fs-extra": "^11.0.4",
+    "chokidar": "^4.0.3",
+    "fs-extra": "^11.3.2",
+    "path": "^0.12.7"
+  }
+}
