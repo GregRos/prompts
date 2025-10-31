@@ -1,6 +1,7 @@
 import chokidar from "chokidar";
 import fs from "fs-extra";
 import path from "path";
+import { pathToFileURL } from "url";
 
 const copilotPromptsDir = String.raw`C:\Users\Greg\AppData\Roaming\Code - Insiders\User\prompts`;
 // Map relative source dirs -> relative destination dirs
@@ -151,9 +152,4 @@ async function main() {
   for (const [s, d] of Object.entries(MAPPED)) console.log(`  ${s} -> ${d}`);
 }
 
-if (require.main === module) {
-  main().catch((e) => {
-    console.error("Fatal error in deploy watcher:", e);
-    process.exit(1);
-  });
-}
+main();
