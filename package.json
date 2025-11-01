@@ -12,6 +12,7 @@
     "front-matter": "^4.0.2",
     "fs-extra": "^11.3.2",
     "globby": "^15.0.0",
+    "gpt-3-encoder": "^1.1.4",
     "path": "^0.12.7"
   }
 }

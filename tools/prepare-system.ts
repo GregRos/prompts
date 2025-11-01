@@ -3,6 +3,7 @@ import fs from "fs-extra";
 import fm from "front-matter";
 import { globby } from "globby";
 import { fileURLToPath } from "url";
+import { encode } from "gpt-3-encoder";
 
 // Directory containing the source Markdown files to concatenate.
 // Adjust this path if you want a different source directory.
@@ -46,6 +47,7 @@ async function main() {
   await fs.ensureDir(outDir);
 
   const files = await gatherMarkdownFiles(SOURCE_DIR);
+  console.info(`Found ${files.length} markdown files in ${SOURCE_DIR}`);
   if (!files.length) {
     console.warn(`No markdown files found in ${SOURCE_DIR}`);
     await fs.writeFile(outFile, "");
@@ -64,15 +66,29 @@ async function main() {
 
   for (const f of files) {
     const raw = await fs.readFile(f, "utf8");
-    const body = stripFrontMatter(raw);
-    // Add a header comment with source filename for traceability
-    const rel = path.relative(process.cwd(), f);
-    pieces.push(`<!-- Source: ${rel} -->\n\n${body}`);
+    let body = stripFrontMatter(raw);
+
+    // Ensure trailing newline on each file body before concatenation
+    if (!body.endsWith("\n")) {
+      body += "\n";
+    }
+
+    pieces.push(body);
   }
 
-  const final = pieces.join("\n\n---\n\n");
+  const final = pieces.join("");
   await fs.writeFile(outFile, final, "utf8");
-  console.info(`Wrote concatenated file to ${outFile} (${files.length} files)`);
+  // Compute file size and token count using the package's exported `encode` (statically imported for typing)
+  const stat = await fs.stat(outFile);
+
+  // Intentionally do not catch errors from `encode` so they propagate to the caller
+  // (per repository rule: don't swallow errors). If `encode` throws, the process
+  // should fail so the caller can handle or surface the issue.
+  const tokenCount = encode(final).length;
+
+  console.info(
+    `Wrote concatenated file to ${outFile} (${files.length} files) — size: ${stat.size} bytes, tokens: ${tokenCount}`
+  );
 }
 
 main();

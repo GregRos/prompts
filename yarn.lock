@@ -15,6 +15,7 @@ __metadata:
     front-matter: "npm:^4.0.2"
     fs-extra: "npm:^11.3.2"
     globby: "npm:^15.0.0"
+    gpt-3-encoder: "npm:^1.1.4"
     path: "npm:^0.12.7"
     typescript: "npm:^5.9.3"
   languageName: unknown
@@ -190,6 +191,13 @@ __metadata:
     slash: "npm:^5.1.0"
     unicorn-magic: "npm:^0.3.0"
   checksum: 10c0/e4107be0579bcdd9642b8dff86aeafeaf62b2b9dd116669ab6e02e0e0c07ada0d972c2db182dee7588b460fe8c8919ddcc6b1cc4db405ca3a2adc9d35fa6eb21
+  languageName: node
+  linkType: hard
+
+"gpt-3-encoder@npm:^1.1.4":
+  version: 1.1.4
+  resolution: "gpt-3-encoder@npm:1.1.4"
+  checksum: 10c0/01ad204183e1a9fdf5e478a0633e65f91c2a2d956c0d23fd27fb3134b3b571e9fcab2a198b19a7c0f8a498e5134d11d13aab9f87ccc5e27e981ac1bff2f7087b
   languageName: node
   linkType: hard
 
