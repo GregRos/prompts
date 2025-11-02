@@ -2,9 +2,10 @@ import { readFile } from "fs/promises";
 import { globby } from "globby";
 import { dump } from "js-yaml";
 import { FolderFrontmatterIndex } from "./folder-index.js";
-import { aseq, seq } from "doddle";
+import { aseq, doddle, seq } from "doddle";
 import { yamprint } from "yamprint";
 import { basename } from "path";
+import { encode } from "gpt-3-encoder";
 
 const indexRegex = /^(?<index>\d+)\.(?<name>.+?)(?<ext>\..*)?$/;
 export class MdFileNamePart {
@@ -52,9 +53,18 @@ export class MdFile {
     return new MdFile(root, path, parts as any, frontmatter);
   }
 
+  _rawContents = doddle(() => {
+    return readFile(`${this.root}/${this.path}`, "utf-8");
+  });
+
   async contents() {
-    const contents = await readFile(`${this.root}/${this.path}`, "utf-8");
+    const contents = await this._rawContents.pull();
     return [formatFrontmatter(this.frontmatter), contents].join("\n");
+  }
+
+  async tokenCost(): Promise<number> {
+    const raw = await this._rawContents.pull();
+    return encode(raw).length;
   }
 
   get indexPart() {

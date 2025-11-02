@@ -65,20 +65,6 @@
         "name": "",
         "active": true,
         "type": "DIRECTORIES",
-        "pattern": "scripts",
-        "patternType": "STRICT"
-      },
-      {
-        "name": "",
-        "active": true,
-        "type": "DIRECTORIES",
-        "pattern": "types",
-        "patternType": "STRICT"
-      },
-      {
-        "name": "",
-        "active": true,
-        "type": "DIRECTORIES",
         "pattern": "dist",
         "patternType": "STRICT"
       }

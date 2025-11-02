@@ -2,6 +2,7 @@ import { readFile } from "fs/promises";
 import { globby } from "globby";
 import { dump } from "js-yaml";
 import { seq } from "doddle";
+import { FolderFrontmatterIndex } from "../indexing/folder-index.js";
 
 const indexRegex = /^(?<index>\d+)(?<name>.+?)(?<ext>\..*)?$/;
 export class MdFileNamePart {
