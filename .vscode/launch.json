@@ -6,7 +6,7 @@
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["tsx", "${workspaceFolder}/tools/deploy.ts"],
+      "runtimeArgs": ["tsx", "${workspaceFolder}/tools/src/exporter/main.ts"],
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",

@@ -8,11 +8,18 @@
   },
   "dependencies": {
     "@types/fs-extra": "^11.0.4",
+    "@types/js-yaml": "^4.0.9",
+    "@types/lodash": "^4.17.20",
     "chokidar": "^4.0.3",
+    "doddle": "^7.1.6",
     "front-matter": "^4.0.2",
     "fs-extra": "^11.3.2",
     "globby": "^15.0.0",
     "gpt-3-encoder": "^1.1.4",
-    "path": "^0.12.7"
+    "js-yaml": "^4.1.0",
+    "lodash": "^4.17.21",
+    "path": "^0.12.7",
+    "rxjs": "^7.8.2",
+    "yamprint": "^0.8.4"
   }
 }

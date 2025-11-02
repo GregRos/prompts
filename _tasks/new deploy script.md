@@ -63,8 +63,3 @@ Create files with the new name and merged frontmatter in `DEST_DIR`.
 Write tests for:
 1. File name replacer.
 2. Frontmatter inheritance without `import`.
-
-
-
-
-

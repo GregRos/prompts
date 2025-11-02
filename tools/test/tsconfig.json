@@ -3,11 +3,10 @@
   "references": [{ "path": "../src/tsconfig.cjs.json" }],
   "compilerOptions": {
     "rootDir": ".",
-    "baseUrl": ".",
     "module": "es2015",
     "target": "ES2020",
     "moduleResolution": "Bundler",
-    "tsBuildInfoFile": "../.buildinfo/test.cjs.tsbuildinfo",
+    "tsBuildInfoFile": "../dist-test/test.tsbuildinfo",
     "paths": {
       "@lib": ["../src/index"]
     }
