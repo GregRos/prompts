@@ -8,9 +8,24 @@ Deeper `_.ts` files overwrite previous `_.ts` files.
 
 # Process
 Use globbing for this.
+## Folder indexing
+Retrieve all folders using `SOURCE_DIR/**/*` with folders only restriction.
 
-## Indexing
-First, index all files and folders as follows.
+Go over all the folders in `SOURCE_DIR`. For each folder, compute its attached frontmatter without looking anywhere else.
 
-First, go over all the folders in `SOURCE_DIR` recursively. For each folder, compute its attached frontmatter. Keep 
+Build a Map of relative path -> frontmatter object.
+
+Go over all the entries in the Map and merge frontmatter based on containment, with deeper frontmatter preferred. Mutate.
+
+## File indexing
+Retrieve all files using `SOURCE_DIR/**/*` with files only.
+
+Build a Map of relative path -> file content.
+
+For each entry, look in the folder map to see what its frontmatter should be.
+
+Use 
+
+
+
 
