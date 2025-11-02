@@ -5,12 +5,9 @@
     "sourceMap": true,
     "noEmit": true,
     "strict": true,
+    "esModuleInterop": true,
     "declaration": true,
-    "declarationMap": true,
-    "skipLibCheck": true,
-    "stripInternal": true,
-    "skipDefaultLibCheck": true,
-    "useDefineForClassFields": false
+    "declarationMap": true
   },
   "files": []
 }
