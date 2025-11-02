@@ -5,11 +5,15 @@ import path from "path";
 import { MdFile } from "./file-index.js";
 
 export class Folder {
-  private constructor(readonly path: string, public frontmatter: object) {}
+  private constructor(
+    readonly root: string,
+    readonly path: string,
+    public frontmatter: object
+  ) {}
 
-  static async create(path: string) {
-    const frontmatter = await getFrontmatterScriptAt(path);
-    return new Folder(path, frontmatter);
+  static async create(root: string, path: string) {
+    const frontmatter = await getFrontmatterScriptAt(`${root}/${path}`);
+    return new Folder(root, path, frontmatter);
   }
 
   get parents() {
@@ -35,7 +39,7 @@ export class FolderFrontmatterIndex {
     });
     const folderObjects = await Promise.all(
       seq(folderPaths).map(async (x) => {
-        return Folder.create(x);
+        return Folder.create(root, x);
       })
     );
     return new FolderFrontmatterIndex(folderObjects);

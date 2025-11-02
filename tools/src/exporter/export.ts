@@ -14,7 +14,7 @@ export async function runExport(src: string, dest: string) {
   const writeThem = fileIndex.map(async (mdFile) => {
     const contents = await mdFile.contents();
     const destPath = mdFile.flattenedPathAt(dest);
-    set.add(destPath);
+    set.add(destPath.replaceAll("\\", "/"));
     await writeFile(destPath, contents, "utf-8");
   });
   await Promise.all(writeThem);

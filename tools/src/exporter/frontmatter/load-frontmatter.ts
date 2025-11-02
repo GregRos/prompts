@@ -1,25 +1,30 @@
+import path from "path";
+
 export type FrontmatterLeaf = string | number | boolean | Frontmatter;
 export type Frontmatter = {
   [key: string]: FrontmatterLeaf | FrontmatterLeaf[];
 };
+import { pathToFileURL } from "node:url";
 
-function getPureModulePath(folder: string) {
-  return `${folder}/_.js`;
+function getPureModuleUrl(folder: string, name = "_.js") {
+  return pathToFileURL(`${folder}/${name}`).href;
 }
 function getCacheBustingModulePath(folder: string) {
-  return `${getPureModulePath(folder)}?t=${Date.now()}`;
+  return `${getPureModuleUrl(folder)}?t=${Date.now()}`;
 }
 export async function getFrontmatterScriptAt(
-  path: string
+  _path: string
 ): Promise<Frontmatter> {
+  const attemptedPath = getPureModuleUrl(_path);
   try {
-    const imported = await import(getPureModulePath(path));
+    console.log(`Loading frontmatter from ${attemptedPath}`);
+    const imported = await import(attemptedPath);
     return {
       ...imported,
     };
   } catch (error: any) {
-    if (error?.code.includes("NOT_FOUND")) {
-      console.warn(`No frontmatter found at ${getPureModulePath(path)}`);
+    if (error?.code?.includes("NOT_FOUND")) {
+      console.error(error.message);
       return {};
     }
 

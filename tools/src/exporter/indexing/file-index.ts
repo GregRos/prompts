@@ -25,7 +25,10 @@ export class MdFileNamePart {
 }
 
 function formatFrontmatter(frontmatter: object) {
-  const dumped = dump(frontmatter);
+  const dumped = dump(frontmatter, {
+    quotingType: '"',
+    forceQuotes: true,
+  });
   return ["---", dumped.trim(), "---"].join("\n");
 }
 export class MdFile {
