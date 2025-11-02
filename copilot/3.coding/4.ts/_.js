@@ -1,3 +1,3 @@
-import { jsTsFiles, tsFiles } from "../../_scopes.js";
+import { tsFiles } from "../../_scopes.js"
 
 export const applyTo = tsFiles

@@ -1,14 +1,9 @@
 {
   "name": "@gregros/prompts",
   "type": "module",
-  "packageManager": "yarn@4.9.1",
-  "devDependencies": {
-    "@types/node": "^24.9.2",
-    "typescript": "^5.9.3"
-  },
   "scripts": {
     "build": "tsc -b .",
-    "lint:fix": ""
+    "lint:fix": "prettier --write ."
   },
   "dependencies": {
     "@types/fs-extra": "^11.0.4",
@@ -29,5 +24,10 @@
     "prettier-plugin-packagejson": "^2.5.0",
     "rxjs": "^7.8.2",
     "yamprint": "^0.8.4"
-  }
+  },
+  "devDependencies": {
+    "@types/node": "^24.9.2",
+    "typescript": "^5.9.3"
+  },
+  "packageManager": "yarn@4.9.1"
 }

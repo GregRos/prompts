@@ -1,3 +1,3 @@
-import { pythonFiles } from "../../_scopes.js";
+import { pythonFiles } from "../../_scopes.js"
 
 export const applyTo = pythonFiles
