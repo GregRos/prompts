@@ -3,7 +3,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc -b .",
-    "lint:fix": "prettier --write ."
+    "lint:fix": "prettier --write .",
+    "tidy": "run-s build lint:fix"
   },
   "dependencies": {
     "@types/fs-extra": "^11.0.4",
