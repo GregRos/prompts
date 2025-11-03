@@ -1,21 +1,22 @@
 import { seq } from "doddle"
 import { globby } from "globby"
-import { getFrontmatterScriptAt } from "../frontmatter/load-frontmatter.js"
 
+import { Path } from "../../util/pathlib.js"
+import { getFrontmatterScriptAt } from "../frontmatter/load-frontmatter.js"
 export class Folder {
     private constructor(
         readonly root: string,
-        readonly path: string,
+        readonly path: Path,
         public frontmatter: object
     ) {}
 
     static async create(root: string, path: string) {
         const frontmatter = await getFrontmatterScriptAt(`${root}/${path}`)
-        return new Folder(root, path, frontmatter)
+        return new Folder(root, Path(path), frontmatter)
     }
 
     get parents() {
-        return seq(this.path.split("/"))
+        return seq(this.path.parts)
             .skip(-1)
             .scan((acc, cur) => {
                 return [...acc, cur]

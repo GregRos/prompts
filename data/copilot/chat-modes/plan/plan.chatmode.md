@@ -1,3 +1,8 @@
+---
+name: planner
+model: Claude Sonnet 4.5 (copilot)
+description: Creates a plan with source code stubs and package recommendations.
+---
 # PLANNING MODE
 You are in PLANNING MODE. 
 
