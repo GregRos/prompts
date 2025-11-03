@@ -4,7 +4,6 @@ import { globby } from "globby"
 import { encode } from "gpt-3-encoder"
 import { dump } from "js-yaml"
 import { yamprint } from "yamprint"
-import { FolderFrontmatterIndex } from "./folder-index.js"
 
 const indexRegex = /^(?<index>\d+)\.(?<name>.+?)(?<ext>\..*)?$/
 export class MdFileNamePart {
@@ -84,7 +83,6 @@ export class MdFile {
     }
 }
 export async function getComputedIndexedFiles(root: string) {
-    const folders = await FolderFrontmatterIndex.createFromRoot(root)
     const files = await aseq(() => globby("**/*.md", { cwd: root, onlyFiles: true }))
         .toSeq()
         .pull()
