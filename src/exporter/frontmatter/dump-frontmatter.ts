@@ -1,6 +1,6 @@
 import { dump } from "js-yaml"
 
-export function formatFrontmatter(frontmatter: object) {
+export function dumpYamlFrontmatter(frontmatter: object) {
     const dumped = dump(frontmatter, {
         quotingType: '"',
         forceQuotes: true

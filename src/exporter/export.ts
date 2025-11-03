@@ -1,35 +1,39 @@
-import { seq } from "doddle"
-import { rm, writeFile } from "fs/promises"
-import { globby } from "globby"
-import {} from "timers/promises"
-import { yamprint } from "yamprint"
-import { getComputedIndexedFiles } from "./indexing/file-index.js"
-export async function runExport(src: string, dest: string) {
-    const fileIndex = await getComputedIndexedFiles(src)
-    console.log("FILES TO EXPORT", yamprint(fileIndex.map(x => x.flattenedName)))
-    const set = new Set<string>()
-    let totalTokens = 0
-    const writeThem = fileIndex.map(async mdFile => {
-        const cost = await mdFile.tokenCost()
-        console.log(`tokens for ${mdFile.flattenedName}:`, cost)
-        totalTokens += cost
-        const contents = await mdFile.contents()
-        const destPath = mdFile.flattenedPathAt(dest)
-        set.add(destPath.replaceAll("\\", "/"))
-        await writeFile(destPath, contents, "utf-8")
-    })
-    await Promise.all(writeThem)
-    console.log("TOTAL TOKENS", totalTokens)
+import { aseq } from "doddle"
+import { Path } from "../util/pathlib.js"
+import { ChatModeIndexer } from "./export-chatmodes/chat-mode-indexer.js"
+import { RuleIndexer } from "./export-rules/rule-indexer.js"
+import { MasterIndex } from "./parse-markdown/master-index.js"
+import { DestContent } from "./src-dest.js"
 
-    const foundFiles = await globby(`**/*.p.instructions.md`, {
-        cwd: dest,
-        onlyFiles: true,
-        absolute: true
+export async function runExport(sourceDir: string, destDir: string) {
+    const sourcePath = Path(sourceDir)
+    const destRoot = Path(destDir)
+    const chatModeIndexer = await ChatModeIndexer.create(sourcePath)
+    const ruleIndexer = await RuleIndexer.create(sourcePath)
+    const masterIndex = new MasterIndex(sourcePath, chatModeIndexer, ruleIndexer)
+    const writeRules = aseq(ruleIndexer.ruleGroups).map(async grp => {
+        const flattened = await grp.flatten()
+        const destPath = destRoot.join(flattened.path.toString())
+        const content = flattened.content
+        return new DestContent(destPath, content)
     })
-    const deleteThem = seq(foundFiles).map(async f => {
-        if (!set.has(f)) {
-            await rm(f)
-        }
+    const writeChatModes = aseq(chatModeIndexer.chatModes).map(async cm => {
+        const chatModeFile = await cm.chatModeFile.readFile("utf-8")
+        const resolvedChatMode = await masterIndex.resolveMarkdown(chatModeFile)
+        const destPath = destRoot.join(cm.chatModeFile.toString())
+        return new DestContent(destPath, resolvedChatMode)
     })
-    await Promise.all(deleteThem)
+    const allWrites = await writeRules
+        .concat(writeChatModes)
+        .map(async x => {
+            const newContent = await masterIndex.resolveMarkdown(x.content)
+            return x.withContent(newContent)
+        })
+        .toSeq()
+        .pull()
+
+    const writePs = allWrites.map(async write => {
+        await write.path.writeFile(write.content, "utf-8")
+    })
+    await Promise.all(writePs)
 }
