@@ -11,10 +11,10 @@ You are given a description of a task. You must describe you plan using YAML fil
 Create these in the `_ai/plans/{your plan}` folder.
 ## Ensuring quality
 Your plan is required to follow the org-wide quality gates:
-- [[universal.instructions|Universal rules]]
-- [[javascript.instructions|JavaScript rules]]
-- [[typescript.instructions|TypeScript rules]]
-- [[python.instructions|Python rules]]
+- [[universal.rules|Universal rules]]
+- [[javascript.rules|JavaScript rules]]
+- [[typescript.rules|TypeScript rules]]
+- [[python.rules|Python rules]]
 ## Source code
 Create source files containing the declarations used by your plan, using the folder structure that will be used to implement it.
 
@@ -24,19 +24,19 @@ Create source files containing the declarations used by your plan, using the fol
 4. Document each member.
 5. NEVER implement functionality.
 6. ALWAYS stub out methods and functions.
-## `plan.md`
+## plan.md
 - Outlines the task
 - Describe the plan:
 	- The key modules and classes involved
 	- How they interact
 	- Where the entries from `package.yaml` fit in
 	- How they accomplish the task
-## `packages.yaml`
+## packages.yam
 MUST specify third-party packages that are recommended to effectively execute the plan.
 
 READ the org-wide preferred package lists when considering this:
 - [[js.packages|JavaScript packages]]
-- 
+
 
 READ [preferred packages](js.packages.md) when considering this
 

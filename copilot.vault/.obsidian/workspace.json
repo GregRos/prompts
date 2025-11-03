@@ -4,17 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "133c6bb2093cebf9",
+        "id": "91973f2ca0894289",
         "type": "tabs",
         "children": [
           {
-            "id": "32571ac375785b90",
+            "id": "1519a16877b46eea",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "copilot/chat-modes/plan/plan.chatmode.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "plan.chatmode"
             }
           }
         ]
@@ -159,12 +163,17 @@
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
       "command-palette:Open command palette": false,
-      "bases:Create new base": false,
-      "file-tree-alternative:File Tree Alternative Plugin": false
+      "bases:Create new base": false
     }
   },
-  "active": "fe6d54fa1493593d",
+  "active": "1519a16877b46eea",
   "lastOpenFiles": [
+    "copilot/chat-modes/review/rules/javascript.md",
+    "copilot/chat-modes/plan/plan.chatmode.md",
+    "copilot/chat-modes/_rules/_rules_block.md",
+    "typescript.instructions.md",
+    "copilot/rules/javascript/naming.rules.md",
+    "copilot/rules/javascript/javascript.rules.md",
     "data/copilot/chat-modes/plan/plan.chatmode.md",
     "src/util/pathlib.ts",
     "src/util",
@@ -194,12 +203,6 @@
     "data/copilot/instructions/universal/universal.rules.md",
     "data/copilot/instructions/typescript/typescript.rules.md",
     "data/copilot/instructions/rxjs/rxjs.rules.md",
-    "data/copilot/instructions/python/type-hints.rules.md",
-    "data/copilot/instructions/python/python.rules.md",
-    "data/copilot/instructions/python/naming.rules.md",
-    "data/copilot/instructions/javascript/naming.rules.md",
-    "data/copilot/instructions/javascript/javascript.rules.md",
-    "data/copilot/chat-modes/tester/12.tests.rules.md",
-    "data/copilot/chat-modes/plan/plan.md"
+    "data/copilot/instructions/python/type-hints.rules.md"
   ]
 }

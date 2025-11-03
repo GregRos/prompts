@@ -1,14 +1,13 @@
 import { aseq, doddle } from "doddle"
-import { readFile } from "fs/promises"
 import { globby } from "globby"
 import { encode } from "gpt-3-encoder"
-import { dump } from "js-yaml"
 import { yamprint } from "yamprint"
+import { Path } from "../../util/pathlib.js"
+import { formatFrontmatter } from "../frontmatter/dump-frontmatter.js"
 
-const indexRegex = /^(?<index>\d+)\.(?<name>.+?)(?<ext>\..*)?$/
+const indexRegex = /^(?<name>.+?)(?<ext>\..*)?$/
 export class MdFileNamePart {
     constructor(
-        readonly index: number,
         readonly name: string,
         readonly ext: string
     ) {}
@@ -18,23 +17,15 @@ export class MdFileNamePart {
         if (!match) {
             return undefined
         }
-        const { index, name, ext } = match.groups!
-        return new MdFileNamePart(+index, name, ext)
+        const { name, ext } = match.groups!
+        return new MdFileNamePart(name, ext)
     }
 }
 
-function formatFrontmatter(frontmatter: object) {
-    const dumped = dump(frontmatter, {
-        quotingType: '"',
-        forceQuotes: true
-    })
-    return ["---", dumped.trim(), "---"].join("\n")
-}
 export class MdFile {
     private constructor(
         readonly root: string,
         readonly path: string,
-        readonly parts: MdFileNamePart[],
         readonly frontmatter: object
     ) {}
 
@@ -44,11 +35,11 @@ export class MdFile {
         if (parts.some(x => x == null)) {
             return undefined
         }
-        return new MdFile(root, path, parts as any, frontmatter)
+        return new MdFile(root, path, frontmatter)
     }
 
     _rawContents = doddle(() => {
-        return readFile(`${this.root}/${this.path}`, "utf-8")
+        return Path(this.root).join(this.path).readFile("utf-8")
     })
 
     async contents() {
@@ -61,11 +52,8 @@ export class MdFile {
         return encode(raw).length
     }
 
-    get indexPart() {
-        return +this.parts.map(x => x.index).join("")
-    }
-
     get namePart() {
+        const nameParts = 
         return this.parts.map(x => x.name).join("_")
     }
 

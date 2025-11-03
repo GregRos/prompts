@@ -1,0 +1,4 @@
+- [[universal.rules|Universal rules]]
+- [[javascript.rules|JavaScript rules]]
+- [[typescript.rules|TypeScript rules]]
+- [[python.rules|Python rules]]

@@ -21,6 +21,7 @@ __metadata:
     gpt-3-encoder: "npm:^1.1.4"
     js-yaml: "npm:^4.1.0"
     lodash: "npm:^4.17.21"
+    parjs: "npm:^1.3.9"
     path: "npm:^0.12.7"
     pathlib-js: "npm:^1.5.0"
     prettier: "npm:^3.3.1"
@@ -326,6 +327,15 @@ __metadata:
     tar: "npm:^7.4.3"
     unique-filename: "npm:^4.0.0"
   checksum: 10c0/01f2134e1bd7d3ab68be851df96c8d63b492b1853b67f2eecb2c37bb682d37cb70bb858a16f2f0554d3c0071be6dfe21456a1ff6fa4b7eed996570d6a25ffe9c
+  languageName: node
+  linkType: hard
+
+"char-info@npm:0.3.*":
+  version: 0.3.5
+  resolution: "char-info@npm:0.3.5"
+  dependencies:
+    node-interval-tree: "npm:^1.3.3"
+  checksum: 10c0/d83bf7e91fa983c6ba1690d4aafc6ce9861f1126855752b9b9f162e38bdab9ed478610125f3715e6c43c62b670828e10567efc52a7e8a4f6df992e41b9509841
   languageName: node
   linkType: hard
 
@@ -1305,6 +1315,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"node-interval-tree@npm:^1.3.3":
+  version: 1.3.3
+  resolution: "node-interval-tree@npm:1.3.3"
+  dependencies:
+    shallowequal: "npm:^1.0.2"
+  checksum: 10c0/81af3ba623465e93a0ff8f488f60c53f9aeeac151fb5b657af4e0e9a751818cc27aadf44110e082e28a56ca0929f49045378f72c9dba4d754b137859cb3bd4ba
+  languageName: node
+  linkType: hard
+
 "nopt@npm:^8.0.0":
   version: 8.1.0
   resolution: "nopt@npm:8.1.0"
@@ -1341,6 +1360,15 @@ __metadata:
   version: 1.0.0
   resolution: "parameter.js@npm:1.0.0"
   checksum: 10c0/4cfd2b23b379759b3363af85a1a58c617ca0299a0dec908456aaefb7fd48563c58e8db736687ebee5815908256ebf683b2de5feed910524944e3595c5441ab96
+  languageName: node
+  linkType: hard
+
+"parjs@npm:^1.3.9":
+  version: 1.3.9
+  resolution: "parjs@npm:1.3.9"
+  dependencies:
+    char-info: "npm:0.3.*"
+  checksum: 10c0/e8bebf66e4cfd68a52468571780a94f9bdee5c3fa067f20609d12aa3f1172dcbd8f352aa4c1ec22acad652b4dcbb4799c4dbcc236ff3e4bda0847e155c69b628
   languageName: node
   linkType: hard
 
@@ -1550,6 +1578,13 @@ __metadata:
   bin:
     semver: bin/semver.js
   checksum: 10c0/4afe5c986567db82f44c8c6faef8fe9df2a9b1d98098fc1721f57c696c4c21cebd572f297fc21002f81889492345b8470473bc6f4aff5fb032a6ea59ea2bc45e
+  languageName: node
+  linkType: hard
+
+"shallowequal@npm:^1.0.2":
+  version: 1.1.0
+  resolution: "shallowequal@npm:1.1.0"
+  checksum: 10c0/b926efb51cd0f47aa9bc061add788a4a650550bbe50647962113a4579b60af2abe7b62f9b02314acc6f97151d4cf87033a2b15fc20852fae306d1a095215396c
   languageName: node
   linkType: hard
 
