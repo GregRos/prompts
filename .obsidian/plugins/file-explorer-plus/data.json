@@ -51,13 +51,6 @@
         "name": "",
         "active": true,
         "type": "DIRECTORIES",
-        "pattern": "tools",
-        "patternType": "STRICT"
-      },
-      {
-        "name": "",
-        "active": true,
-        "type": "DIRECTORIES",
         "pattern": "searches",
         "patternType": "STRICT"
       },

@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.base.esm.json",
+  "extends": "../tsconfig.base.esm.json",
   "compilerOptions": {
     "composite": true,
     "tsBuildInfoFile": "../dist/src.tsbuildinfo",

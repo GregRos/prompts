@@ -1,0 +1,9 @@
+{
+  "files.exclude": {
+    "node_modules": true,
+    "dist": true,
+    ".yarn": true,
+    ".obsidian": true,
+    ".out": true
+  }
+}
