@@ -1,0 +1,14 @@
+# Universal
+
+## Coding
+NEVER write fallback code
+## Exceptions
+NEVER swallow arbitrary exceptions
+## Not your job
+NEVER modify code you didn't write
+NEVER write tests
+NEVER modify existing names
+NEVER write argument parsers
+NEVER handle exceptions
+NEVER validate function arguments
+NEVER write API doc comments

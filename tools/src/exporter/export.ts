@@ -1,9 +1,9 @@
 import { seq } from "doddle"
 import { rm, writeFile } from "fs/promises"
 import { globby } from "globby"
+import {} from "timers/promises"
 import { yamprint } from "yamprint"
 import { getComputedIndexedFiles } from "./indexing/file-index.js"
-
 export async function runExport(src: string, dest: string) {
     const fileIndex = await getComputedIndexedFiles(src)
     console.log("FILES TO EXPORT", yamprint(fileIndex.map(x => x.flattenedName)))
