@@ -78,3 +78,4 @@ tools-dist/
 
 **/__pycache__/
 .out
+.obsidian/workspace.json

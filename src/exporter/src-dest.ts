@@ -3,7 +3,7 @@ import type { Path } from "../util/pathlib.js"
 export class SrcDest {
     constructor(
         readonly src: Path,
-        readonly dest: Path
+        readonly dest: string
     ) {}
 }
 

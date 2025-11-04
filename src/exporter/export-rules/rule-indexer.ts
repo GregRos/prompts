@@ -6,14 +6,14 @@ import { SrcDest } from "../src-dest.js"
 
 export class RuleFile {
     constructor(
-        readonly path: Path,
+        readonly path: string,
         readonly frontmatter: Frontmatter,
         private readonly _content: DoddleAsync<string>
     ) {}
 
     static async fromPath(path: Path): Promise<RuleFile> {
         return new RuleFile(
-            path,
+            path.toString(),
             {},
             doddle(async () => await path.readFile("utf-8"))
         )
@@ -25,14 +25,20 @@ export class RuleFile {
         content: string
     ): Promise<RuleFile> {
         return new RuleFile(
-            Path(path),
+            path,
             frontmatter,
             doddle(async () => content)
         )
     }
 
-    get content() {
-        return [dumpYamlFrontmatter(this.frontmatter), this._content].join("\n\n")
+    async content() {
+        const pulled = await this._content.pull()
+        return pulled.trim()
+    }
+
+    async contentWithFrontmatter() {
+        const pulled = await this.content()
+        return [dumpYamlFrontmatter(this.frontmatter), pulled].join("\n\n")
     }
 }
 export class RuleGroup {
@@ -51,19 +57,19 @@ export class RuleGroup {
     }
 
     get targetPath() {
-        const ruleDest = `./${this.root.basename}.instructions.md`
-        return Path(ruleDest)
+        const ruleDest = `_${this.root.basename}.instructions.md`
+        return ruleDest
     }
 
     get pairs() {
-        return this.ruleFiles.map(ruleFile => new SrcDest(ruleFile.path, this.targetPath))
+        return this.ruleFiles.map(ruleFile => new SrcDest(Path(ruleFile.path), this.targetPath))
     }
 
     async flatten(): Promise<RuleFile> {
         const contents = this.ruleFiles.map(async file => {
-            return file.content
+            return file.contentWithFrontmatter()
         })
-        const everything = Promise.all(contents).then(xs => xs.join("\n\n"))
+        const everything = Promise.all(contents).then(xs => xs.map(x => x.trim()).join("\n"))
         const ruleDest = this.targetPath.toString()
         return RuleFile.fromContent(ruleDest, this.frontmatter, await everything)
     }
@@ -86,8 +92,7 @@ export class RuleIndexer {
 
         const groups = await Promise.all(
             groupDirs.map(async dir => {
-                const groupPath = root.join(dir.toString())
-                return RuleGroup.create(groupPath)
+                return RuleGroup.create(dir)
             })
         )
 

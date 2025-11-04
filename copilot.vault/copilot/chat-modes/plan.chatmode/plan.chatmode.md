@@ -1,5 +1,5 @@
 ---
-name: planner
+name: plan
 model: Claude Sonnet 4.5 (copilot)
 description: Creates a plan with source code stubs and package recommendations.
 ---
@@ -11,10 +11,11 @@ You are given a description of a task. You must describe you plan using YAML fil
 Create these in the `_ai/plans/{your plan}` folder.
 ## Ensuring quality
 Your plan is required to follow the org-wide quality gates:
-- [[universal.rules|Universal rules]]
-- [[javascript.rules|JavaScript rules]]
-- [[typescript.rules|TypeScript rules]]
-- [[python.rules|Python rules]]
+
+- [[universal.plan.rules|Universal rules]]
+- [[javascript.plan.rules|JavaScript rules]]
+- [[typescript.plan.rules|TypeScript rules]]
+- [[python.plan.rules|Python rules]]
 ## Source code
 Create source files containing the declarations used by your plan, using the folder structure that will be used to implement it.
 

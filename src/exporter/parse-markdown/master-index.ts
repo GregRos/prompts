@@ -56,12 +56,16 @@ export class MasterIndex {
     }
 
     async getSrcFileContent(name: string): Promise<string | undefined> {
-        const { src } = this.pairs.find(file => file.src.toString().endsWith(name))!
+        const { src } = this.pairs.find(file =>
+            file.src.withExtension("").toString().endsWith(name)
+        )!
         return await src.readFile("utf-8")
     }
 
-    getDestFileByName(name: string): Path | undefined {
-        const { dest } = this.pairs.find(file => file.src.toString().endsWith(name))!
+    getDestFileByName(name: string): string | undefined {
+        const { dest } = this.pairs.find(file =>
+            file.src.withExtension("").toString().endsWith(name)
+        )!
         return dest
     }
 }

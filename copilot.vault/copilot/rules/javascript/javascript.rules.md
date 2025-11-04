@@ -14,15 +14,14 @@ NEVER write `for .. in` loops
 PREFER `x == null` WHEN checking nullish
 ALWAYS use epsilon WHEN comparing floating points
 PREFER `x?.y`, `x?.y()`, `x?.[y]
-PREFER `??`
+PREFER`??`
 PREFER separators for long numbers
 ## Exceptions
 NEVER catch the error or rejection from an entrypoint function
 NEVER check if an entrypoint is an entrypoint
 %%WHEN using streams, treat them as async iterables%%
 ## Declarations
-PREFER lambda functions over anonymous functions
+PREFER arrow functions over anonymous functions
 ## Paths
 ALWAYS use `/` even for Windows paths
 ALWAYS convert `\\` paths to `/`
-

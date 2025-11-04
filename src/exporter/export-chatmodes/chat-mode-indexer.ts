@@ -1,9 +1,10 @@
 import type { Path } from "../../util/pathlib.js"
+import { fixExportedFileName } from "../fix-name.js"
 import { SrcDest } from "../src-dest.js"
 
 async function getRuleFilesForChatMode(chatModePath: Path): Promise<Path[]> {
-    const rulesDir = chatModePath.join("rules")
-    return await rulesDir.glob("*.rules.md", {
+    const rulesDir = chatModePath
+    return await rulesDir.glob("**/*.rules.md", {
         onlyFiles: true,
         absolute: true
     })
@@ -16,8 +17,13 @@ export class ChatMode {
     ) {}
 
     get pairs() {
-        const ruleFiles = this.ruleFiles.map(ruleFile => new SrcDest(ruleFile, ruleFile))
-        const chatFile = new SrcDest(this.chatModeFile, this.chatModeFile)
+        const ruleFiles = this.ruleFiles.map(
+            ruleFile => new SrcDest(ruleFile, fixExportedFileName(ruleFile.basename))
+        )
+        const chatFile = new SrcDest(
+            this.chatModeFile,
+            fixExportedFileName(this.chatModeFile.basename)
+        )
         return [...ruleFiles, chatFile]
     }
 
@@ -35,11 +41,12 @@ export class ChatMode {
 export class ChatModeIndexer {
     private constructor(
         readonly root: Path,
-        readonly chatModes: ChatMode[]
+        readonly chatModes: ChatMode[],
+        readonly extraPairs: SrcDest[]
     ) {}
 
     get pairs() {
-        return this.chatModes.flatMap(cm => cm.pairs)
+        return this.chatModes.flatMap(cm => cm.pairs).concat(this.extraPairs)
     }
 
     static async create(root: Path): Promise<ChatModeIndexer> {
@@ -48,6 +55,11 @@ export class ChatModeIndexer {
             onlyDirectories: true
         })
         const chatModePromises = await Promise.all(chatModeDirs.map(dir => ChatMode.create(dir)))
-        return new ChatModeIndexer(root, chatModePromises)
+        const extras = await chatModeRoot.glob("*.md", {
+            onlyFiles: true,
+            absolute: true
+        })
+        const extraPairs = extras.map(file => new SrcDest(file, fixExportedFileName(file.basename)))
+        return new ChatModeIndexer(root, chatModePromises, extraPairs)
     }
 }

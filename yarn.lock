@@ -30,6 +30,7 @@ __metadata:
     prettier-plugin-packagejson: "npm:^2.5.0"
     rxjs: "npm:^7.8.2"
     typescript: "npm:^5.9.3"
+    what-are-you: "npm:^0.1.13"
     yamprint: "npm:^0.8.4"
   languageName: unknown
   linkType: soft
@@ -1855,6 +1856,13 @@ __metadata:
   dependencies:
     inherits: "npm:2.0.3"
   checksum: 10c0/d29f6893e406b63b088ce9924da03201df89b31490d4d011f1c07a386ea4b3dbe907464c274023c237da470258e1805d806c7e4009a5974cd6b1d474b675852a
+  languageName: node
+  linkType: hard
+
+"what-are-you@npm:^0.1.13":
+  version: 0.1.13
+  resolution: "what-are-you@npm:0.1.13"
+  checksum: 10c0/a39c1e47fe6aaf8bfe1b248d4a1804f9524c7d22a3c7b7b0f050028d8756e9b494a2894fcae5121a39fb04d12bf1d21273c86dcc4561118e00fc1af1d9ba1b1e
   languageName: node
   linkType: hard
 
