@@ -8,6 +8,16 @@
       "problemMatcher": ["$tsc-watch"],
       "group": "build",
       "label": "tsc: watch - tsconfig.json"
+    },
+    {
+      "type": "shell",
+      "label": "Watch SCSS",
+      "command": "npx sass --watch styles/main.scss:copilot.vault/.obsidian/snippets/custom.css",
+      "isBackground": true,
+      "problemMatcher": [],
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
     }
   ]
 }

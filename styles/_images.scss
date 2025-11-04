@@ -1,0 +1,37 @@
+$img_hammer-page: "https://img.icons8.com/?size=100&id=xxHGOAVQE3lq&format=png&color=000000";
+$img_yes-no-book: "https://img.icons8.com/?size=100&id=KGqdRCbzdscK&format=png&color=000000";
+$img_magic-brain: "https://img.icons8.com/?size=100&id=M16ic8QWK8x6&format=png&color=000000";
+$img_james-bond: "https://img.icons8.com/?size=100&id=FWEyS4pICP3o&format=png&color=000000";
+$img_bot-message: "https://img.icons8.com/?size=100&id=L3uh0mNuxBXw&format=png&color=000000";
+$img_scroll: "https://img.icons8.com/?size=100&id=119004&format=png&color=000000";
+
+$rules-file: $img_hammer-page;
+$rules-folder: $img_yes-no-book;
+$chatmode-file: $img_magic-brain;
+$chatmode-dir: $img_magic-brain;
+$prompt-file: $img_bot-message;
+$prompt-folder: $img_scroll;
+
+$file-to-icon: (
+    "chatmode": $chatmode-dir,
+    "chatmode.md": $chatmode-file,
+    "rules.md": $rules-file,
+    "rules": $rules-folder,
+    "prompt.md": $prompt-file,
+    "prompt": $prompt-folder
+);
+
+$name-to-type-to-icon: (
+    "rules": (
+        "markdown": $rules-file,
+        "mk-space": $rules-folder
+    ),
+    "chatmode": (
+        "markdown": $chatmode-file,
+        "mk-space": $chatmode-dir
+    ),
+    "prompt": (
+        "markdown": $prompt-file,
+        "mk-space": $prompt-folder
+    )
+);

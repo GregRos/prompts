@@ -69,7 +69,7 @@ jspm_packages
 
 # Optional npm cache directory
 .npm
-
+.makemd
 # Optional REPL history
 .node_repl_history
 .tmp
@@ -78,4 +78,7 @@ tools-dist/
 
 **/__pycache__/
 .out
-.obsidian/workspace.json
+**/.obsidian/workspace.json
+**/.obsidian/**/*.css
+**/.obsidian/**/*.map
+**/.trash

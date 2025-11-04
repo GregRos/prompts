@@ -29,6 +29,7 @@ __metadata:
     prettier-plugin-organize-imports: "npm:^3.2.4"
     prettier-plugin-packagejson: "npm:^2.5.0"
     rxjs: "npm:^7.8.2"
+    scss: "npm:^0.2.4"
     typescript: "npm:^5.9.3"
     what-are-you: "npm:^0.1.13"
     yamprint: "npm:^0.8.4"
@@ -1343,6 +1344,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"ometa@npm:0.2.2":
+  version: 0.2.2
+  resolution: "ometa@npm:0.2.2"
+  checksum: 10c0/6d834b01cf92e5020c63d9a2c2cbfa131b7e03c1ce78cbac42263e93a57dd33d3d8f10c96d8bce4721513f1d09e147891ac33951da6ea1c77d14cca3eb652283
+  languageName: node
+  linkType: hard
+
 "p-map@npm:^7.0.2":
   version: 7.0.3
   resolution: "p-map@npm:7.0.3"
@@ -1570,6 +1578,15 @@ __metadata:
   version: 2.1.2
   resolution: "safer-buffer@npm:2.1.2"
   checksum: 10c0/7e3c8b2e88a1841c9671094bbaeebd94448111dd90a81a1f606f3f67708a6ec57763b3b47f06da09fc6054193e0e6709e77325415dc8422b04497a8070fa02d4
+  languageName: node
+  linkType: hard
+
+"scss@npm:^0.2.4":
+  version: 0.2.4
+  resolution: "scss@npm:0.2.4"
+  dependencies:
+    ometa: "npm:0.2.2"
+  checksum: 10c0/41aa26a7d6baaa1b264c3bc6005f865ceb895050ef62563368491db12b63fda7fc73a46dbe129f68255abdc8aab9c6ef83f8a5dfda0f57857e8cf96846e92f3e
   languageName: node
   linkType: hard
 

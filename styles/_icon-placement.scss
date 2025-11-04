@@ -1,0 +1,77 @@
+@import "./_images.scss";
+@function bg-line($image) {
+    @return url(#{$image}) no-repeat center / contain;
+}
+
+@mixin tab-icon($icon) {
+    .workspace-tab-header-inner-icon {
+        svg {
+            visibility: hidden !important;
+        }
+        display: inline-block !important;
+        width: 16px !important;
+        background: bg-line($icon) !important;
+    }
+}
+
+@mixin nav-icon($icon) {
+    .mk-path-icon button {
+        svg {
+            visibility: hidden !important;
+        }
+        background: bg-line($icon) !important;
+    }
+}
+
+@mixin title-icon($icon) {
+    &::before {
+        content: "";
+        justify-self: center;
+        align-self: center;
+        display: inline-block;
+        margin-bottom: -5px;
+        height: 32px;
+        width: 32px;
+        margin-right: 10px;
+        background: bg-line($icon);
+    }
+}
+
+@mixin bc-icon($icon) {
+    &::before {
+        content: "";
+        display: inline-block;
+        height: 12px;
+        width: 12px;
+        margin-bottom: -2px;
+        margin-right: 6px;
+        background: bg-line($icon);
+    }
+}
+
+@each $label-end, $icon in $file-to-icon {
+    .mk-tree-item[data-path$="#{$label-end}"] {
+        @include nav-icon($icon);
+    }
+
+    .view-header-breadcrumb[aria-label$="#{$label-end}"] {
+        @include bc-icon($icon);
+    }
+}
+.mk-title-container {
+    flex-wrap: nowrap !important;
+}
+
+@each $label-end, $type-to-icon in $name-to-type-to-icon {
+    @each $data-key, $icon in $type-to-icon {
+        .workspace-tab-header[aria-label$="#{$label-end}"][data-type="#{$data-key}"] {
+            @include tab-icon($icon);
+
+            @at-root .workspace-tabs:has(&.is-active) {
+                .inline-title {
+                    @include title-icon($icon);
+                }
+            }
+        }
+    }
+}

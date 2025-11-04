@@ -12,10 +12,10 @@ Create these in the `_ai/plans/{your plan}` folder.
 ## Ensuring quality
 Your plan is required to follow the org-wide quality gates:
 
-- [[universal.plan.rules|Universal rules]]
-- [[javascript.plan.rules|JavaScript rules]]
-- [[typescript.plan.rules|TypeScript rules]]
-- [[python.plan.rules|Python rules]]
+- [[copilot/chat-modes/plan.chatmode/plan.rules/_.rules|Universal rules]]
+- [[copilot/chat-m
+- [[copilot/chat-modes/plan.chatmode/plan.rules/ts.rules|TypeScript rules]]
+- [[copilot/chat-modes/plan.chatmode/plan.rules/py.rules|Python rules]]
 ## Source code
 Create source files containing the declarations used by your plan, using the folder structure that will be used to implement it.
 
