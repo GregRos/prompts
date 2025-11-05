@@ -1,0 +1,11 @@
+@use "../_common/_" as *;
+@use "../_colors/_" as *;
+@mixin folder-title-style() {
+    color: $folder-color $IMP;
+    font-weight: 500 $IMP;
+}
+
+@mixin file-title-style() {
+    color: $file-color $IMP;
+    font-weight: 400 $IMP;
+}

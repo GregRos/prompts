@@ -1,6 +1,7 @@
-@use "../common/_" as *;
+@use "../_common/_" as *;
 @use "./_images.scss" as *;
-@use "../colors/_" as *;
+@use "../_colors/_" as *;
+@use "../_motifs/_" as *;
 @use "sass:map" as *;
 $_rules-file: $img_hammer-page;
 $_rules-folder: $img_yes-no-book;
@@ -28,12 +29,11 @@ $file-to-icon: (
     @return url(#{$image}) no-repeat center / contain;
 }
 @mixin set-color-from-icon-name($icon-name) {
+    font-family: var(--font-monospace) $IMP;
     @if ends-with($icon-name, ".md") {
-        color: $file-color $IMP;
-        font-weight: 400;
+        @include file-title-style();
     } @else {
-        color: $folder-color $IMP;
-        font-weight: 500;
+        @include folder-title-style();
     }
 }
 

@@ -1,5 +1,5 @@
-@use "../colors/_headings.scss" as c;
-@use "../common/_" as *;
+@use "../_colors/_headings.scss" as c;
+@use "../_common/_" as *;
 
 @for $i from 1 through c.get-heading-count() {
     .view-content {

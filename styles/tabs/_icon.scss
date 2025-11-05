@@ -1,6 +1,6 @@
 @use "../icons/_" as icons;
-@use "../common/_" as *;
-@use "../colors/_" as *;
+@use "../_common/_" as *;
+@use "../_colors/_" as *;
 @use "sass:map" as map;
 $name-to-type-to-icon-name: (
     "rules": (

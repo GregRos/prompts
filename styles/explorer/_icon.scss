@@ -1,4 +1,4 @@
-@use "../common/_" as *;
+@use "../_common/_" as *;
 @use "../icons/_" as icons;
 @mixin _explorer-icon($icon) {
     .mk-path-icon button {

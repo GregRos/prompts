@@ -1,7 +1,13 @@
-@use "../common/_" as *;
-@use "../colors/_" as *;
+@use "../_common/_" as *;
+@use "../_colors/_" as *;
+@use "../_motifs/_" as *;
+
 .view-header-breadcrumb {
-    color: $folder-color $IMP;
-    font-weight: 500 $IMP;
+    @include folder-title-style();
+    font-size: 16px $IMP;
+}
+
+.view-header-title {
+    @include file-title-style();
     font-size: 16px $IMP;
 }

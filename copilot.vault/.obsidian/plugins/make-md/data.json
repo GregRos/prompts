@@ -98,10 +98,13 @@
     "copilot/agents/plan.agent",
     "copilot/agents/copilot/agents/plan.agent",
     "copilot/agents/copilot/agents/impl.agent/copilot/agents/impl.agent/rules/copilot/agents/impl.agent/rules/py.rules",
-    "copilot/agents/copilot/agents/review.agent",
     "copilot/agents/copilot/agents/review.agent/copilot/agents/review.agent/review.rules",
     "copilot/agents/copilot/agents/impl.agent",
-    "copilot/agents/copilot/agents/impl.agent/copilot/agents/impl.agent/rules"
+    "copilot/agents/copilot/agents/impl.agent/copilot/agents/impl.agent/rules",
+    "copilot/agents/copilot/agents/tester.agent",
+    "copilot/agents/copilot/agents/review.agent",
+    "copilot/agents/copilot/agents/plan.agent/copilot/agents/plan.agent/rules",
+    "copilot/agents/copilot/agents/plan.agent/copilot/agents/plan.agent/rules/copilot/agents/plan.agent/rules/py.plan.rules"
   ],
   "expandFolderOnClick": true,
   "spacesFolder": "Tags",

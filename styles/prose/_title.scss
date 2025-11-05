@@ -1,4 +1,4 @@
-@use "../common/_" as *;
+@use "../_common/_" as *;
 @use "../icons/_" as icons;
 @use "../tabs/" as tabs;
 @mixin _title-icon($icon-name) {
@@ -16,8 +16,11 @@
 }
 
 @include tabs.loop-selected-tabs-by-icon using ($icon) {
-    .inline-title {
+    .inline-title,
+    .title-alias {
         @include _title-icon($icon);
+        @include icons.set-color-from-icon-name($icon);
+        font-weight: 600 $IMP;
     }
 }
 

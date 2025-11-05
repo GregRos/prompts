@@ -1,5 +1,5 @@
-@use "../common/_" as *;
-@use "../colors/_" as *;
+@use "../_common/_" as *;
+@use "../_colors/_" as *;
 @for $i from 1 through 100 {
     .mk-tree-node[data-index="#{$i}"] {
         @if $i % 2 == 1 {

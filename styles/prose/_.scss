@@ -1,4 +1,4 @@
-@use "../common/_" as *;
+@use "../_common/_" as *;
 @use "../tabs/" as tabs;
 @forward "./headings.scss";
-@forward "./icon.scss";
+@forward "./title.scss";

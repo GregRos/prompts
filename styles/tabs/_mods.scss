@@ -1,7 +1,10 @@
-@use "../common/_" as *;
-@use "../colors/tabs" as tabc;
+@use "../_common/_" as *;
+@use "../_colors/tabs" as tabc;
 @use "../styling.scss" as styling;
 @use "../icons/_" as icons;
+$_tab-box-shadow-strong: 0px -6px 2px 0px rgba(0, 0, 0, 0.564);
+$_tab-box-shadow-active: 0px 0px 2px 2px rgb(253, 253, 255);
+
 .workspace-split.mod-vertical .workspace-tab-header-container {
     --tab-font-size: 18px $IMP;
     --header-height: auto $IMP;
@@ -13,10 +16,10 @@
         &::after {
             display: none $IMP;
         }
-        box-shadow: var(--box-shadow-strong) $IMP;
+        box-shadow: $_tab-box-shadow-strong $IMP;
 
         &.is-active {
-            box-shadow: var(--box-shadow-active) $IMP;
+            box-shadow: $_tab-box-shadow-active $IMP;
         }
         &:hover {
             .workspace-tab-header-inner-close-button {
