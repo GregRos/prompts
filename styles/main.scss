@@ -1,3 +1,4 @@
-@use "./alternating.scss" as *;
-@use "./layout.scss" as *;
-@use "./_icon-placement.scss" as *;
+@use "./explorer/" as *;
+@use "./tabs/" as *;
+@use "./icons/" as *;
+@use "./breadcrumbs/" as *;

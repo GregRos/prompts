@@ -1,4 +1,4 @@
-@use "./icon-assignment" as icons;
+@use "./_maps.scss" as icons;
 @function bg-line($image) {
     @return url(#{$image}) no-repeat center / contain;
 }
