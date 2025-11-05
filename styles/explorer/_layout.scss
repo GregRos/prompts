@@ -1,22 +1,21 @@
 @use "../common/_" as *;
 
 .mk-tree-item {
-    --icon-container-size: 20px $I;
+    --icon-container-size: 20px $imp;
 }
-.theme-dark,
-.theme-light {
-    --nav-item-background-active: transparent $I;
-    --nav-item-background-hover: transparent $I;
+.theme-dark {
+    --nav-item-background-active: transparent $imp;
+    --nav-item-background-hover: transparent $imp;
 }
 
 .mk-tree-node:has(.is-selected) {
-    background-color: rgba(56, 165, 84, 0.202) $I;
+    background-color: $explorer-selected-bg $imp;
     border-radius: 6px;
 }
 .mk-tree-node:hover {
-    background-color: rgba(233, 104, 104, 0.447) $I;
+    background-color: $explorer-hover-bg $imp;
     border-radius: 6px;
 }
 .mk-tree-text {
-    font-size: 17px $I;
+    font-size: 17px $imp;
 }

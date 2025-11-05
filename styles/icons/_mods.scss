@@ -7,20 +7,20 @@
 @mixin tab-icon($icon) {
     .workspace-tab-header-inner-icon {
         svg {
-            visibility: hidden $I;
+            visibility: hidden $imp;
         }
-        display: inline-block $I;
-        width: 16px $I;
-        background: bg-line($icon) $I;
+        display: inline-block $imp;
+        width: 16px $imp;
+        background: bg-line($icon) $imp;
     }
 }
 
 @mixin nav-icon($icon) {
     .mk-path-icon button {
         svg {
-            visibility: hidden $I;
+            visibility: hidden $imp;
         }
-        background: bg-line($icon) $I;
+        background: bg-line($icon) $imp;
     }
 }
 
@@ -60,7 +60,7 @@
     }
 }
 .mk-title-container {
-    flex-wrap: nowrap $I;
+    flex-wrap: nowrap $imp;
 }
 
 @each $label-end, $type-to-icon in icons.$name-to-type-to-icon {

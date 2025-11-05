@@ -1,19 +1,19 @@
 @mixin padding-lr($padding) {
-    padding-left: $padding $I;
-    padding-right: $padding $I;
+    padding-left: $padding $imp;
+    padding-right: $padding $imp;
 }
 
 @mixin padding-tb($padding) {
-    padding-top: $padding $I;
-    padding-bottom: $padding $I;
+    padding-top: $padding $imp;
+    padding-bottom: $padding $imp;
 }
 
 @mixin margin-lr($margin) {
-    margin-left: $margin $I;
-    margin-right: $margin $I;
+    margin-left: $margin $imp;
+    margin-right: $margin $imp;
 }
 
 @mixin margin-tb($margin) {
-    margin-top: $margin $I;
-    margin-bottom: $margin $I;
+    margin-top: $margin $imp;
+    margin-bottom: $margin $imp;
 }

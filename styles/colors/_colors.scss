@@ -1,0 +1,60 @@
+@use "sass:list" as *;
+
+/* Non-tab colors (SCSS variables) */
+$alternating-color: rgba(200, 200, 200, 0.027);
+
+// Explorer
+$explorer-selected-bg: rgba(56, 165, 84, 0.202);
+$explorer-hover-bg: rgba(233, 104, 104, 0.447);
+
+// Breadcrumbs
+$breadcrumb-color: rgb(167, 242, 135);
+
+/* Tab palette: keep values in a SCSS list, then emit CSS variables in a loop.
+     Only the CSS variables are used at runtime; the source list makes editing easy.
+*/
+$tab-colors: (
+    #1b2c32,
+    #042f0d,
+    #510d50,
+    #6f0c0c,
+    #2a2265,
+    #3e4b39,
+    #540640,
+    #2b095a,
+    #470060,
+    #561f1f,
+    #32402e,
+    #120d4d,
+    #0e3805,
+    #385100,
+    #003c34
+);
+
+/* Emit CSS variables under the same scope as before */
+.theme-dark {
+    @for $k from 1 through length($tab-colors) {
+        --tab-color-#{$k}: #{nth($tab-colors, $k)};
+    }
+}
+
+/* SCSS helper functions that operate on the CSS variables for tabs */
+@function css-lighten($varName, $amount) {
+    @return lch(from var(#{$varName}) calc(l + $amount) c h);
+}
+
+@function get-tab-color($index) {
+    @return var(--tab-color-#{$index});
+}
+
+@function get-tab-color-normal($index) {
+    @return css-lighten(--tab-color-#{$index}, -10);
+}
+
+@function get-tab-color-active($index) {
+    @return css-lighten(--tab-color-#{$index}, 10);
+}
+
+@function get-tab-color-hover($index) {
+    @return css-lighten(--tab-color-#{$index}, 20);
+}
