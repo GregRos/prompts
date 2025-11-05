@@ -1,0 +1,15 @@
+@use "../common/_" as *;
+@use "../icons/_" as icons;
+@mixin _explorer-icon($icon) {
+    .mk-path-icon button {
+        svg {
+            visibility: hidden $IMP;
+        }
+        @include icons.set-bg-icon($icon);
+    }
+}
+@each $label-end, $icon in icons.$file-to-icon {
+    .mk-tree-item[data-path$="#{$label-end}"] {
+        @include _explorer-icon($icon);
+    }
+}

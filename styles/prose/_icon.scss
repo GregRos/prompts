@@ -1,0 +1,26 @@
+@use "../common/_" as *;
+@use "../icons/_" as icons;
+@use "../tabs/" as tabs;
+@mixin _title-icon($icon-name) {
+    &::before {
+        content: "";
+        justify-self: center;
+        align-self: center;
+        display: inline-block;
+        margin-bottom: -5px;
+        height: 32px;
+        width: 32px;
+        margin-right: 10px;
+        @include icons.set-bg-icon-from-name($icon-name);
+    }
+}
+
+@include tabs.loop-selected-tabs-by-icon using ($icon) {
+    .inline-title {
+        @include _title-icon($icon);
+    }
+}
+
+.mk-title-container {
+    flex-wrap: nowrap $IMP;
+}

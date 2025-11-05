@@ -1,21 +1,9 @@
 @use "../common/_" as *;
-
+@use "../icons/_" as icons;
 .mk-tree-item {
-    --icon-container-size: 20px $imp;
-}
-.theme-dark {
-    --nav-item-background-active: transparent $imp;
-    --nav-item-background-hover: transparent $imp;
+    --icon-container-size: 20px $IMP;
 }
 
-.mk-tree-node:has(.is-selected) {
-    background-color: $explorer-selected-bg $imp;
-    border-radius: 6px;
-}
-.mk-tree-node:hover {
-    background-color: $explorer-hover-bg $imp;
-    border-radius: 6px;
-}
 .mk-tree-text {
-    font-size: 17px $imp;
+    font-size: 17px $IMP;
 }

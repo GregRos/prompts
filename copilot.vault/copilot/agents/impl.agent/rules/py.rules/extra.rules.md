@@ -4,7 +4,7 @@ aliases:
 ---
 4# Implementation Rules
 The following are rules for implementers.
-## Implement All Stubs
+# Implement All Stubs
 We ALWAYS make sure to implement all stubs 
 ## Leading-edge Python
 We make zealous use of Pythonic idioms and new language features.

@@ -1,9 +1,0 @@
-@use "../common/_" as *;
-
-@for $i from 1 through 100 {
-    .mk-tree-node[data-index="#{$i}"] {
-        @if $i % 2 == 1 {
-            background-color: $alternating-color;
-        }
-    }
-}

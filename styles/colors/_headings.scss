@@ -1,0 +1,19 @@
+@use "sass:list" as *;
+$_colors: (#f8adef, #9d86ff, #3dff96, #f02fff, #ffad14, #ff3567, #14d1ff);
+$_colors-dark: ();
+@for $i from 1 through length($_colors) {
+    $_colors-dark: append($_colors-dark, darken(nth($_colors, $i), 25%));
+}
+$title-color: nth($_colors, 1);
+
+@function get-heading-color($level) {
+    @return nth($_colors, $level + 1);
+}
+
+@function get-heading-color-dark($level) {
+    @return nth($_colors-dark, $level + 1);
+}
+
+@function get-heading-count() {
+    @return length($_colors) - 1;
+}

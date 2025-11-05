@@ -14,7 +14,7 @@
       "label": "Watch SCSS",
       "command": "npx sass --watch styles/main.scss:copilot.vault/.obsidian/snippets/custom.css",
       "isBackground": true,
-      "problemMatcher": [],
+      "problemMatcher": ["$sas"],
       "runOptions": {
         "runOn": "folderOpen"
       }

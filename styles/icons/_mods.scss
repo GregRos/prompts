@@ -1,44 +1,8 @@
 @use "../common/_" as *;
 @use "./_maps.scss" as icons;
-@function bg-line($image) {
-    @return url(#{$image}) no-repeat center / contain;
-}
+@use "sass:map";
 
-@mixin tab-icon($icon) {
-    .workspace-tab-header-inner-icon {
-        svg {
-            visibility: hidden $imp;
-        }
-        display: inline-block $imp;
-        width: 16px $imp;
-        background: bg-line($icon) $imp;
-    }
-}
-
-@mixin nav-icon($icon) {
-    .mk-path-icon button {
-        svg {
-            visibility: hidden $imp;
-        }
-        background: bg-line($icon) $imp;
-    }
-}
-
-@mixin title-icon($icon) {
-    &::before {
-        content: "";
-        justify-self: center;
-        align-self: center;
-        display: inline-block;
-        margin-bottom: -5px;
-        height: 32px;
-        width: 32px;
-        margin-right: 10px;
-        background: bg-line($icon);
-    }
-}
-
-@mixin bc-icon($icon) {
+@mixin _bc-icon($icon) {
     &::before {
         content: "";
         display: inline-block;
@@ -50,29 +14,18 @@
     }
 }
 
-@each $label-end, $icon in icons.$file-to-icon {
-    .mk-tree-item[data-path$="#{$label-end}"] {
-        @include nav-icon($icon);
-    }
-
-    .view-header-breadcrumb[aria-label$="#{$label-end}"] {
-        @include bc-icon($icon);
-    }
-}
-.mk-title-container {
-    flex-wrap: nowrap $imp;
+@mixin insert_explorer_icon() {
 }
 
-@each $label-end, $type-to-icon in icons.$name-to-type-to-icon {
-    @each $data-key, $icon in $type-to-icon {
-        .workspace-tab-header[aria-label$="#{$label-end}"][data-type="#{$data-key}"] {
-            @include tab-icon($icon);
-
-            @at-root .workspace-tabs:has(&.is-active) {
-                .inline-title {
-                    @include title-icon($icon);
-                }
-            }
+@mixin insert-bc-icon() {
+    @each $label-end, $icon in icons.$file-to-icon {
+        &[aria-label$="#{$label-end}"] {
+            @include _bc-icon($icon);
         }
     }
 }
+
+@mixin insert-title-icon() {
+}
+
+@include insert_explorer_icon();

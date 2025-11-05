@@ -1,71 +1,68 @@
 @use "../common/_" as *;
-@use "../colors/_colors" as tabc;
+@use "../colors/tabs" as tabc;
 @use "../styling.scss" as styling;
+@use "../icons/_" as icons;
 .workspace-split.mod-vertical .workspace-tab-header-container {
-    --tab-font-size: 18px $imp;
-    --header-height: auto $imp;
-    padding-bottom: 5px $imp;
+    --tab-font-size: 18px $IMP;
+    --header-height: auto $IMP;
+    padding-bottom: 5px $IMP;
     .workspace-tab-header {
         &::before {
-            display: none $imp;
+            display: none $IMP;
         }
         &::after {
-            display: none $imp;
+            display: none $IMP;
         }
-        box-shadow: var(--box-shadow-strong) $imp;
+        box-shadow: var(--box-shadow-strong) $IMP;
 
         &.is-active {
-            box-shadow: var(--box-shadow-active) $imp;
+            box-shadow: var(--box-shadow-active) $IMP;
         }
         &:hover {
             .workspace-tab-header-inner-close-button {
-                visibility: visible $imp;
+                visibility: visible $IMP;
             }
         }
         &:hover,
         &.is-active {
             .workspace-tab-header-inner-close-button {
-                visibility: visible $imp;
+                visibility: visible $IMP;
                 color: white;
             }
         }
 
         @for $i from 1 through 15 {
             &:nth-child(#{$i}) {
-                background-color: tabc.get-tab-color-normal(#{$i}) $imp;
+                background-color: tabc.get-tab-color-normal(#{$i}) $IMP;
                 &.is-active {
-                    background-color: tabc.get-tab-color-active(#{$i}) $imp;
+                    background-color: tabc.get-tab-color-active(#{$i}) $IMP;
                 }
                 &:hover {
-                    background-color: tabc.get-tab-color-hover(#{$i}) $imp;
+                    background-color: tabc.get-tab-color-hover(#{$i}) $IMP;
                 }
             }
         }
         .workspace-tab-header-inner-close-button {
-            display: flex $imp;
+            display: flex $IMP;
             visibility: hidden;
         }
-        container-type: unset $imp;
-        max-width: unset $imp;
-        flex-grow: 0.3 $imp;
-        flex-shrink: 0 $imp;
-        flex-basis: auto $imp;
-        padding: 10px 15px $imp;
-        margin: 2px $imp;
-        border-radius: 8px $imp;
+        container-type: unset $IMP;
+        max-width: unset $IMP;
+        flex-grow: 0.3 $IMP;
+        flex-shrink: 0 $IMP;
+        flex-basis: auto $IMP;
+        padding: 10px 15px $IMP;
+        margin: 2px $IMP;
+        border-radius: 8px $IMP;
         &-inner {
-            width: auto $imp;
-            background: unset $imp;
+            width: auto $IMP;
+            background: unset $IMP;
             &-title {
-                overflow: visible $imp;
-                width: auto $imp;
-                flex: none $imp;
+                overflow: visible $IMP;
+                width: auto $IMP;
+                flex: none $IMP;
             }
         }
-        width: auto $imp;
+        width: auto $IMP;
     }
-}
-
-.workspace-tab-header-container-inner {
-    flex-wrap: wrap $imp;
 }

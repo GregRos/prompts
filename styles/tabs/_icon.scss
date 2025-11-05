@@ -1,0 +1,73 @@
+@use "../icons/_" as icons;
+@use "../common/_" as *;
+@use "../colors/_" as *;
+@use "sass:map" as map;
+$name-to-type-to-icon-name: (
+    "rules": (
+        "markdown": "rules.md",
+        "mk-space": "rules"
+    ),
+    "agent": (
+        "markdown": "agent.md",
+        "mk-space": "agent"
+    ),
+    "agents": (
+        "markdown": "agent.md",
+        "mk-space": "agent"
+    ),
+    "prompt": (
+        "markdown": "prompt.md",
+        "mk-space": "prompt"
+    ),
+    "ref": (
+        "markdown": "ref.md",
+        "mk-space": "ref"
+    )
+);
+
+@function get-icon-by-name-type($name, $type) {
+    $type-to-icon-name: map.get($name-to-type-to-icon-name, $name);
+    $icon-name: map.get($type-to-icon-name, $type);
+
+    @return $icon-name;
+}
+@mixin when-selected($label-end, $type) {
+    .workspace-tabs:has(
+        .workspace-tab-header[aria-label$="#{$label-end}"][data-type="#{$type}"].is-active
+    ) {
+        @content;
+    }
+}
+
+@mixin loop-selected-tabs-by-icon() {
+    @each $label-end, $type-to-icon-name in $name-to-type-to-icon-name {
+        @each $data-key, $icon-name in $type-to-icon-name {
+            @include when-selected($label-end, $data-key) {
+                @content ($icon-name);
+            }
+        }
+    }
+}
+
+@mixin _tab-icon($icon-name) {
+    .workspace-tab-header-inner-icon {
+        svg {
+            visibility: hidden $IMP;
+        }
+        display: inline-block $IMP;
+
+        @include icons.set-bg-icon-from-name($icon-name);
+    }
+}
+
+@each $label-end, $type-to-icon-name in $name-to-type-to-icon-name {
+    @each $data-key, $icon-name in $type-to-icon-name {
+        .workspace-tab-header[aria-label$="#{$label-end}"][data-type="#{$data-key}"] {
+            @include _tab-icon($icon-name);
+            @include icons.set-color-from-icon-name($icon-name);
+        }
+    }
+}
+.workspace-tab-header-container-inner {
+    flex-wrap: wrap $IMP;
+}

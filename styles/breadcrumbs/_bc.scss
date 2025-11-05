@@ -1,6 +1,7 @@
 @use "../common/_" as *;
+@use "../colors/_" as *;
 .view-header-breadcrumb {
-    color: $breadcrumb-color $imp;
-    font-weight: 500 $imp;
-    font-size: 16px $imp;
+    color: $folder-color $IMP;
+    font-weight: 500 $IMP;
+    font-size: 16px $IMP;
 }

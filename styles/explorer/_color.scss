@@ -1,0 +1,40 @@
+@use "../common/_" as *;
+@use "../colors/_" as *;
+@for $i from 1 through 100 {
+    .mk-tree-node[data-index="#{$i}"] {
+        @if $i % 2 == 1 {
+            background-color: $alternating-color;
+        }
+    }
+}
+.theme-dark {
+    --nav-item-background-active: transparent $IMP;
+    --nav-item-background-hover: transparent $IMP;
+}
+
+.mk-tree-node:has(.is-active) {
+    background-color: $explorer-selected-bg $IMP;
+}
+
+.mk-tree-node:hover {
+    background-color: $explorer-hover-bg $IMP;
+    border-radius: 6px;
+}
+.mk-tree-node {
+    border-radius: 6px;
+    &:has(.is-active:not(.is-selected)) {
+        background-color: $explorer-active-bg $IMP;
+    }
+    &:has(.is-selected) {
+        background-color: $explorer-selected-bg $IMP;
+    }
+}
+
+.nav-folder-title-content {
+    font-weight: 600 $IMP;
+    color: $folder-color $IMP;
+}
+
+.nav-file-title-content {
+    color: $file-color $IMP;
+}

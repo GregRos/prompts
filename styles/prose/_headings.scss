@@ -1,0 +1,8 @@
+@use "../colors/_headings.scss" as c;
+@use "../common/_" as *;
+
+@for $i from 1 through c.get-heading-count() {
+    .view-content {
+        --h#{$i}-color: #{c.get-heading-color($i) $IMP};
+    }
+}

@@ -1,5 +1,7 @@
 @use "../common/_" as *;
 @use "./_images.scss" as *;
+@use "../colors/_" as *;
+@use "sass:map" as *;
 $_rules-file: $img_hammer-page;
 $_rules-folder: $img_yes-no-book;
 $_agent-file: $img_magic-brain;
@@ -22,26 +24,24 @@ $file-to-icon: (
     "ref.md": $_ref-file,
     "ref": $_ref-folder
 );
+@function bg-line($image) {
+    @return url(#{$image}) no-repeat center / contain;
+}
+@mixin set-color-from-icon-name($icon-name) {
+    @if ends-with($icon-name, ".md") {
+        color: $file-color $IMP;
+        font-weight: 400;
+    } @else {
+        color: $folder-color $IMP;
+        font-weight: 500;
+    }
+}
 
-$name-to-type-to-icon: (
-    "rules": (
-        "markdown": $_rules-file,
-        "mk-space": $_rules-folder
-    ),
-    "agent": (
-        "markdown": $_agent-file,
-        "mk-space": $_agent-dir
-    ),
-    "agents": (
-        "markdown": $_agent-file,
-        "mk-space": $_agent-dir
-    ),
-    "prompt": (
-        "markdown": $_prompt-file,
-        "mk-space": $_prompt-folder
-    ),
-    "ref": (
-        "markdown": $_ref-file,
-        "mk-space": $_ref-folder
-    )
-);
+@mixin set-bg-icon-from-name($icon-name) {
+    $icon: get($file-to-icon, $icon-name);
+    @include set-bg-icon($icon);
+}
+
+@mixin set-bg-icon($icon) {
+    background: bg-line($icon) $IMP;
+}
