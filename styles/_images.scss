@@ -4,34 +4,12 @@ $img_magic-brain: "https://img.icons8.com/?size=100&id=M16ic8QWK8x6&format=png&c
 $img_james-bond: "https://img.icons8.com/?size=100&id=FWEyS4pICP3o&format=png&color=000000";
 $img_bot-message: "https://img.icons8.com/?size=100&id=L3uh0mNuxBXw&format=png&color=000000";
 $img_scroll: "https://img.icons8.com/?size=100&id=119004&format=png&color=000000";
-
-$rules-file: $img_hammer-page;
-$rules-folder: $img_yes-no-book;
-$chatmode-file: $img_magic-brain;
-$chatmode-dir: $img_magic-brain;
-$prompt-file: $img_bot-message;
-$prompt-folder: $img_scroll;
-
-$file-to-icon: (
-    "chatmode": $chatmode-dir,
-    "chatmode.md": $chatmode-file,
-    "rules.md": $rules-file,
-    "rules": $rules-folder,
-    "prompt.md": $prompt-file,
-    "prompt": $prompt-folder
-);
-
-$name-to-type-to-icon: (
-    "rules": (
-        "markdown": $rules-file,
-        "mk-space": $rules-folder
-    ),
-    "chatmode": (
-        "markdown": $chatmode-file,
-        "mk-space": $chatmode-dir
-    ),
-    "prompt": (
-        "markdown": $prompt-file,
-        "mk-space": $prompt-folder
-    )
-);
+$img_manual: "https://img.icons8.com/?size=100&id=AmE9lLCid7lN&format=png&color=000000";
+$img_manual-2: "https://img.icons8.com/?size=100&id=bwUgs69v7bOd&format=png&color=000000";
+$img_page: "https://img.icons8.com/?size=100&id=o69ikUrhKZRd&format=png&color=000000";
+$img_stack-pages: "https://img.icons8.com/?size=100&id=iWvM6e7lOfVe&format=png&color=000000";
+$img_weird-chip: "https://img.icons8.com/?size=100&id=ETwOdwWFfzJH&format=png&color=000000";
+$img_copilot: "https://img.icons8.com/?size=100&id=Yl9ip6CjqAEI&format=png&color=000000";
+$img_chatgpt_2: "https://img.icons8.com/?size=100&id=4GhGzHg3nZeG&format=png&color=000000";
+$img_chatgpt_3: "https://img.icons8.com/?size=100&id=ka3InxFU3QZa&format=png&color=000000";
+$img_chatgpt: "https://img.icons8.com/?size=100&id=bqBDyembTAOT&format=png&color=000000";

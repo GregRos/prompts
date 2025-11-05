@@ -1,6 +1,6 @@
 ---
 aliases:
-  - impl:ts
+  - agent impl rules ts
 ---
 
 # TypeScript

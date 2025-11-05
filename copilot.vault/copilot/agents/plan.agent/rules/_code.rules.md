@@ -1,4 +1,4 @@
-![[universal.rules]]
+![[code.rules]]
 %%## Specifics
 PREFER returning values to mutation or side-effects
 

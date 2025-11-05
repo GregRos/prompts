@@ -1,9 +1,8 @@
 ---
 aliases:
-  - impl:py.rules:extra
+  - agent impl rules py extra
 ---
-
-# Implementation Rules
+4# Implementation Rules
 The following are rules for implementers.
 ## Implement All Stubs
 We ALWAYS make sure to implement all stubs 

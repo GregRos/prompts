@@ -1,0 +1,46 @@
+@use "./images.scss" as *;
+$_rules-file: $img_hammer-page;
+$_rules-folder: $img_yes-no-book;
+$_agent-file: $img_magic-brain;
+$_agent-dir: $img_magic-brain;
+$_prompt-file: $img_bot-message;
+$_prompt-folder: $img_scroll;
+$_ref-file: $img_page;
+$_ref-folder: $img_stack-pages;
+$_main-folder: $img_weird-chip;
+$file-to-icon: (
+    "chatgpt": $img_chatgpt,
+    "copilot": $img_copilot,
+    "agent": $_agent-dir,
+    "agents": $_agent-dir,
+    "agent.md": $_agent-file,
+    "rules.md": $_rules-file,
+    "rules": $_rules-folder,
+    "prompt.md": $_prompt-file,
+    "prompt": $_prompt-folder,
+    "ref.md": $_ref-file,
+    "ref": $_ref-folder
+);
+
+$name-to-type-to-icon: (
+    "rules": (
+        "markdown": $_rules-file,
+        "mk-space": $_rules-folder
+    ),
+    "agent": (
+        "markdown": $_agent-file,
+        "mk-space": $_agent-dir
+    ),
+    "agents": (
+        "markdown": $_agent-file,
+        "mk-space": $_agent-dir
+    ),
+    "prompt": (
+        "markdown": $_prompt-file,
+        "mk-space": $_prompt-folder
+    ),
+    "ref": (
+        "markdown": $_ref-file,
+        "mk-space": $_ref-folder
+    )
+);
