@@ -1,3 +1,4 @@
+@use "../common/_" as *;
 @use "./_maps.scss" as icons;
 @function bg-line($image) {
     @return url(#{$image}) no-repeat center / contain;
@@ -6,20 +7,20 @@
 @mixin tab-icon($icon) {
     .workspace-tab-header-inner-icon {
         svg {
-            visibility: hidden !important;
+            visibility: hidden $I;
         }
-        display: inline-block !important;
-        width: 16px !important;
-        background: bg-line($icon) !important;
+        display: inline-block $I;
+        width: 16px $I;
+        background: bg-line($icon) $I;
     }
 }
 
 @mixin nav-icon($icon) {
     .mk-path-icon button {
         svg {
-            visibility: hidden !important;
+            visibility: hidden $I;
         }
-        background: bg-line($icon) !important;
+        background: bg-line($icon) $I;
     }
 }
 
@@ -59,7 +60,7 @@
     }
 }
 .mk-title-container {
-    flex-wrap: nowrap !important;
+    flex-wrap: nowrap $I;
 }
 
 @each $label-end, $type-to-icon in icons.$name-to-type-to-icon {

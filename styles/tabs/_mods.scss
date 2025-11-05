@@ -1,0 +1,70 @@
+@use "../common/_" as *;
+@use "./_tab-colors.scss" as tabc;
+.workspace-split.mod-vertical .workspace-tab-header-container {
+    --tab-font-size: 18px $I;
+    --header-height: auto $I;
+    padding-bottom: 5px $I;
+    .workspace-tab-header {
+        &::before {
+            display: none $I;
+        }
+        &::after {
+            display: none $I;
+        }
+        box-shadow: 0px -6px 2px 0px rgba(0, 0, 0, 0.564) $I;
+
+        &.is-active {
+            box-shadow: 0px 0px 2px 2px rgb(253, 253, 255) $I;
+        }
+        &:hover {
+            .workspace-tab-header-inner-close-button {
+                visibility: visible $I;
+            }
+        }
+        &:hover,
+        &.is-active {
+            .workspace-tab-header-inner-close-button {
+                visibility: visible $I;
+                color: white;
+            }
+        }
+
+        @for $i from 1 through 15 {
+            &:nth-child(#{$i}) {
+                background-color: tabc.get-tab-color-normal(#{$i}) $I;
+                &.is-active {
+                    background-color: tabc.get-tab-color-active(#{$i}) $I;
+                }
+                &:hover {
+                    background-color: tabc.get-tab-color-hover(#{$i}) $I;
+                }
+            }
+        }
+        .workspace-tab-header-inner-close-button {
+            display: flex $I;
+            visibility: hidden;
+        }
+        container-type: unset $I;
+        max-width: unset $I;
+        flex-grow: 0.3 $I;
+        flex-shrink: 0 $I;
+        flex-basis: auto $I;
+        padding: 10px 15px $I;
+        margin: 2px $I;
+        border-radius: 8px $I;
+        &-inner {
+            width: auto $I;
+            background: unset $I;
+            &-title {
+                overflow: visible $I;
+                width: auto $I;
+                flex: none $I;
+            }
+        }
+        width: auto $I;
+    }
+}
+
+.workspace-tab-header-container-inner {
+    flex-wrap: wrap $I;
+}

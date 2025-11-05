@@ -1,3 +1,4 @@
+@use "../common/_" as *;
 $odd-color: rgba(200, 200, 200, 0.027);
 @for $i from 1 through 100 {
     .mk-tree-node[data-index="#{$i}"] {

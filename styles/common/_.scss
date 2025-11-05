@@ -1,0 +1,20 @@
+$I: unquote("!important");
+@mixin padding-lr($padding) {
+    padding-left: $padding $I;
+    padding-right: $padding $I;
+}
+
+@mixin padding-tb($padding) {
+    padding-top: $padding $I;
+    padding-bottom: $padding $I;
+}
+
+@mixin margin-lr($margin) {
+    margin-left: $margin $I;
+    margin-right: $margin $I;
+}
+
+@mixin margin-tb($margin) {
+    margin-top: $margin $I;
+    margin-bottom: $margin $I;
+}
