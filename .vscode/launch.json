@@ -19,7 +19,12 @@
       "request": "launch",
       "runtimeExecutable": "node",
       "program": "${workspaceFolder}/dist/exporter/main.js",
-      "runtimeArgs": ["--enable-source-maps", "--async-stack-traces"],
+      "runtimeArgs": [
+        "--enable-source-maps",
+        "--async-stack-traces",
+        "--trace-uncaught",
+        "--unhandled-rejections=strict"
+      ],
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",

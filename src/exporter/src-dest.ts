@@ -9,11 +9,20 @@ export class SrcDest {
 
 export class DestContent {
     constructor(
+        readonly src: Path,
         readonly path: Path,
         readonly content: string
     ) {}
 
+    static src(src: Path, content: string): DestContent {
+        return new DestContent(src, src, content)
+    }
+
+    static dest(src: Path, path: Path, content: string): DestContent {
+        return new DestContent(src, path, content)
+    }
+
     withContent(newContent: string): DestContent {
-        return new DestContent(this.path, newContent)
+        return new DestContent(this.src, this.path, newContent)
     }
 }

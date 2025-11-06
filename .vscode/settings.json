@@ -1,10 +1,15 @@
 {
   "python.languageServer": "None",
+  "typescript.preferences.preferTypeOnlyAutoImports": false,
   "files.exclude": {
     "node_modules": true,
     "dist": true,
     ".yarn": true,
     ".obsidian": true,
+    "**/.space": true,
+    "**/.obsidian": true,
+    "**/.makemd": true,
+    "**/.trash": true,
     ".out": true
   }
 }

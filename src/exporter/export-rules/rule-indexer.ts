@@ -1,44 +1,39 @@
-import { doddle, type DoddleAsync } from "doddle"
+import { frontmatter } from "../../util/frontmatter.js"
 import { Path } from "../../util/pathlib.js"
 import { dumpYamlFrontmatter } from "../frontmatter/dump-frontmatter.js"
-import { getFrontmatterScriptAt, type Frontmatter } from "../frontmatter/load-frontmatter.js"
-import { SrcDest } from "../src-dest.js"
+import { type Frontmatter } from "../frontmatter/load-frontmatter.js"
+import { DestContent, SrcDest } from "../src-dest.js"
+import { expandRuleFrontmatter } from "./expander.js"
+import { flattenRuleFiles } from "./flatten.js"
 
 export class RuleFile {
     constructor(
         readonly path: string,
         readonly frontmatter: Frontmatter,
-        private readonly _content: DoddleAsync<string>
+        readonly _content: string
     ) {}
 
     static async fromPath(path: Path): Promise<RuleFile> {
-        return new RuleFile(
-            path.toString(),
-            {},
-            doddle(async () => await path.readFile("utf-8"))
-        )
+        const content = await path.readFile("utf-8")
+        const fm = frontmatter<{ [key: string]: any }>(content)
+        return new RuleFile(path.toString(), fm.attributes, fm.body)
     }
 
-    static async fromContent(
+    static fromContent(
         path: string,
         frontmatter: Frontmatter,
         content: string
-    ): Promise<RuleFile> {
-        return new RuleFile(
-            path,
-            frontmatter,
-            doddle(async () => content)
-        )
+    ): RuleFile {
+        return new RuleFile(path, frontmatter, content)
     }
 
-    async content() {
-        const pulled = await this._content.pull()
-        return pulled.trim()
+    get body() {
+        return this._content.trim()
     }
 
-    async contentWithFrontmatter() {
-        const pulled = await this.content()
-        return [dumpYamlFrontmatter(this.frontmatter), pulled].join("\n\n")
+    get data(): string {
+        const fmString = dumpYamlFrontmatter(this.frontmatter)
+        return `${fmString}\n\n${this.body}`
     }
 }
 export class RuleGroup {
@@ -46,46 +41,102 @@ export class RuleGroup {
         readonly root: Path,
         readonly frontmatter: Frontmatter,
         readonly ruleFiles: RuleFile[]
-    ) {}
-
-    static async create(root: Path): Promise<RuleGroup> {
-        const ruleFiles = await root.glob("**/*.rules.md")
-        const ruleFilePromises = ruleFiles.map(file => RuleFile.fromPath(file))
-        const resolvedRuleFiles = await Promise.all(ruleFilePromises)
-        const frontmatter = await getFrontmatterScriptAt(root)
-        return new RuleGroup(root, frontmatter, resolvedRuleFiles)
+    ) {
+        this.ruleFiles.sort((a, b) => a.path.localeCompare(b.path))
     }
 
-    get targetPath() {
+    static async create(root: Path): Promise<RuleGroup> {
+        const ruleFiles = await root.glob("*.rules.md")
+        ruleFiles.sort((a, b) => (a.path < b.path ? -1 : 1))
+        const ruleFilePromises = ruleFiles.map(file => RuleFile.fromPath(file))
+        const resolvedRuleFiles = await Promise.all(ruleFilePromises)
+        const indexRuleFilePath = root.join("_.md")
+        if (!(await indexRuleFilePath.exists())) {
+            throw new Error(
+                `No main rule file found in group: ${root.toString()}`
+            )
+        }
+        const indexRuleFile = await RuleFile.fromPath(indexRuleFilePath)
+
+        if (!indexRuleFile) {
+            throw new Error(
+                `No main rule file found in group: ${root.toString()}`
+            )
+        }
+        const frontmatter = indexRuleFile.frontmatter
+        const expanded = expandRuleFrontmatter(frontmatter)
+
+        const rg = new RuleGroup(root, expanded, resolvedRuleFiles)
+
+        return rg
+    }
+
+    get indexFilePath() {
+        return this.root.join("_.md")
+    }
+
+    get srcIndexFile() {
+        const indexPath = this.indexFilePath
+        const indexC = DestContent.src(
+            indexPath,
+            flattenRuleFiles(this.ruleFiles)
+        )
+        return indexC
+    }
+
+    get srcContent() {
+        const otherStuff = this.ruleFiles.map(rf =>
+            DestContent.src(Path(rf.path), rf.data)
+        )
+        return [this.srcIndexFile, ...otherStuff]
+    }
+
+    destContent(root: Path, ns: string): DestContent {
+        const rf = RuleFile.fromContent(
+            this.indexFilePath.toString(),
+            this.frontmatter,
+            flattenRuleFiles(this.ruleFiles)
+        )
+        let nameBit = `${this.root.basename}.md`.replace(
+            ".rules",
+            ".instructions"
+        )
+        nameBit = [ns, nameBit].filter(x => x).join(".")
+        const destx = `_${nameBit}`
+        const ruleDest = destx
+        const index = this.srcIndexFile
+        const d = DestContent.dest(index.src, root.join(ruleDest), rf.data)
+        return d
+    }
+
+    private get _targetPath() {
         const ruleDest = `_${this.root.basename}.instructions.md`
         return ruleDest
     }
 
-    get pairs() {
-        return this.ruleFiles.map(ruleFile => new SrcDest(Path(ruleFile.path), this.targetPath))
-    }
-
-    async flatten(): Promise<RuleFile> {
-        const contents = this.ruleFiles.map(async file => {
-            return file.contentWithFrontmatter()
-        })
-        const everything = Promise.all(contents).then(xs => xs.map(x => x.trim()).join("\n"))
-        const ruleDest = this.targetPath.toString()
-        return RuleFile.fromContent(ruleDest, this.frontmatter, await everything)
+    get srcDest() {
+        return new SrcDest(this.root, this._targetPath)
     }
 }
 
 export class RuleIndexer {
     private constructor(
         readonly root: Path,
+        readonly namespace: string,
         readonly ruleGroups: RuleGroup[] = []
     ) {}
-    get pairs() {
-        return this.ruleGroups.flatMap(group => group.pairs)
+
+    destContent(root: Path): DestContent[] {
+        const ruleFiles = this.ruleGroups.map(grp =>
+            grp.destContent(root, this.namespace)
+        )
+        return ruleFiles
     }
-    static async create(root: Path): Promise<RuleIndexer> {
-        root = root.join("rules")
-        const groupDirs = await root.glob("*", {
+    get srcContents() {
+        return this.ruleGroups.flatMap(grp => grp.srcContent)
+    }
+    static async create(root: Path, namespace: string): Promise<RuleIndexer> {
+        const groupDirs = await root.glob("*.rules", {
             cwd: root.toString(),
             onlyDirectories: true
         })
@@ -96,6 +147,6 @@ export class RuleIndexer {
             })
         )
 
-        return new RuleIndexer(root, groups)
+        return new RuleIndexer(root, namespace, groups)
     }
 }

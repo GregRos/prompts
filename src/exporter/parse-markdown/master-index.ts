@@ -3,27 +3,64 @@ import { string } from "parjs"
 import { many, map, or, then } from "parjs/combinators"
 import type {} from "rxjs"
 import type { Path } from "../../util/pathlib.js"
-import { ChatModeIndexer } from "../export-chatmodes/chat-mode-indexer.js"
+import { AgentIndexer } from "../export-agents/agent-indexer.js"
+import { RefIndexer } from "../export-ref/ref-indexer.js"
 import { RuleIndexer } from "../export-rules/rule-indexer.js"
-import { anyCharOrEscape, textTillCloserWithAlt } from "./parse-bracketted-notation.js"
+import {
+    anyCharOrEscape,
+    textTillCloserWithAlt
+} from "./parse-bracketted-notation.js"
 import { pRemovePercentComments } from "./remove-comments.js"
 
 export class MasterIndex {
-    constructor(
+    private constructor(
         readonly root: Path,
-        readonly chatModeIndex: ChatModeIndexer,
-        readonly rulesIndexer: RuleIndexer
+        readonly agentIndex: AgentIndexer,
+        readonly rulesIndexer: RuleIndexer,
+        readonly refIndexer: RefIndexer
     ) {}
     static async create(root: Path): Promise<MasterIndex> {
-        const chatModeIndexer = await ChatModeIndexer.create(root)
-        const ruleIndexer = await RuleIndexer.create(root)
-        return new MasterIndex(root, chatModeIndexer, ruleIndexer)
+        const agentIndexer = await AgentIndexer.create(root.join("agents"))
+        const ruleIndexer = await RuleIndexer.create(root.join("rules"), "_x")
+        const refIndexer = await RefIndexer.create(root.join("refs"))
+        return new MasterIndex(root, agentIndexer, ruleIndexer, refIndexer)
     }
 
-    resolveMarkdown(text: string): Promise<string> {
-        const noComments = pRemovePercentComments.parse(text).value
-        const parser = this._internalLinkParser.pull()
-        return parser.parse(noComments).value
+    get srcContent() {
+        return [
+            ...this.agentIndex.srcContent,
+            ...this.rulesIndexer.srcContents,
+            ...this.refIndexer.srcContent
+        ]
+    }
+
+    destContent(root: Path) {
+        const chatModes = this.agentIndex.destContent(root)
+        const rules = this.rulesIndexer.destContent(root)
+        const refs = this.refIndexer.destContent(root)
+        return [...chatModes, ...rules, ...refs]
+    }
+
+    resolveMarkdown(file: Path, text: string): string {
+        const noComments = text
+        const linkParser = this._internalLinkParser.pull()
+        let result = noComments
+        for (let i = 0; i < 2; i++) {
+            try {
+                result = pRemovePercentComments.parse(result).value
+                result = linkParser.parse(result).value
+            } catch (e: any) {
+                const relFile = this.root.relative(file)
+                throw new Error(
+                    `While parsing ${relFile}, failed to resolve link: ${e.message}`,
+                    {
+                        cause: e
+                    }
+                )
+            }
+        }
+
+        return linkParser.parse(noComments).value
     }
 
     private _internalLinkParser = doddle(() => {
@@ -32,40 +69,39 @@ export class MasterIndex {
         const embedOrLink = embed.pipe(or(link))
         const interLink = embedOrLink.pipe(
             then(textTillCloserWithAlt("]]")),
-            map(async ([type, x]) => {
+            map(([type, x]) => {
                 if (type === "embed") {
-                    return await this.getSrcFileContent(x.main)
+                    return this.getSrcFileContent(x.main)
                 }
                 const interlinkTarget = this.getDestFileByName(x.main)!
 
                 const linkText = x.alt
-                const linkTarget = interlinkTarget.toString().replaceAll("\\", "/")
+                const linkTarget = interlinkTarget
+                    .toString()
+                    .replaceAll("\\", "/")
                 return `[${linkText}](${linkTarget})`
             }),
-            or(anyCharOrEscape.pipe(map(x => Promise.resolve(x)))),
+            or(anyCharOrEscape.pipe(map(x => x))),
             many(),
-            map(xs => Promise.all(xs).then(xs => xs.join("")))
+            map(xs => xs.join(""))
         )
         return interLink
     })
 
-    get pairs() {
-        return this.rulesIndexer.ruleGroups
-            .flatMap(grp => grp.pairs)
-            .concat(this.chatModeIndex.pairs)
+    getSrcFileContent(name: string): string | undefined {
+        return this.srcContent.find(file =>
+            file.path.withExtension("").toString().endsWith(name)
+        )?.content
     }
 
-    async getSrcFileContent(name: string): Promise<string | undefined> {
-        const { src } = this.pairs.find(file =>
+    getDestFileByName(name: string): string {
+        const destFiles = this.destContent(this.root)
+        const destFile = destFiles.find(file =>
             file.src.withExtension("").toString().endsWith(name)
-        )!
-        return await src.readFile("utf-8")
-    }
-
-    getDestFileByName(name: string): string | undefined {
-        const { dest } = this.pairs.find(file =>
-            file.src.withExtension("").toString().endsWith(name)
-        )!
-        return dest
+        )
+        if (!destFile) {
+            throw new Error(`Could not find dest file for interlink ${name}`)
+        }
+        return destFile.path.toString()
     }
 }

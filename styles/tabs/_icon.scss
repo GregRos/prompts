@@ -32,8 +32,14 @@ $name-to-type-to-icon-name: (
     @return $icon-name;
 }
 @mixin when-selected($label-end, $type) {
+    $label-end-sel: if(
+        $label-end != "",
+        unquote("[aria-label$='#{$label-end}']"),
+        ""
+    );
+
     .workspace-tabs:has(
-        .workspace-tab-header[aria-label$="#{$label-end}"][data-type="#{$type}"].is-active
+        .workspace-tab-header#{$label-end-sel}[data-type="#{$type}"].is-active
     ) {
         @content;
     }
@@ -46,6 +52,12 @@ $name-to-type-to-icon-name: (
                 @content ($icon-name);
             }
         }
+    }
+    @include when-selected("", "markdown") {
+        @content ("ref.md");
+    }
+    @include when-selected("", "mk-space") {
+        @content ("ref");
     }
 }
 
@@ -67,6 +79,14 @@ $name-to-type-to-icon-name: (
             @include icons.set-color-from-icon-name($icon-name);
         }
     }
+}
+.workspace-tab-header[data-type="markdown"] {
+    @include _tab-icon("ref.md");
+    @include icons.set-color-from-icon-name("ref.md");
+}
+.workspace-tab-header[data-type="mk-space"] {
+    @include _tab-icon("ref");
+    @include icons.set-color-from-icon-name("ref");
 }
 .workspace-tab-header-container-inner {
     flex-wrap: wrap $IMP;
