@@ -1,0 +1,16 @@
+{
+  "name": "@gregros/prompts-content",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Prompt templates and agent definitions",
+  "bugs": {
+    "url": "https://github.com/GregRos/prompts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github:GregRos/prompts",
+    "directory": "packages/prompts"
+  },
+  "license": "MIT",
+  "author": "Greg Rosenbaum"
+}

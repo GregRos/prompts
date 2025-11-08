@@ -1,14 +1,12 @@
 {
   "references": [
     {
-      "path": "./src/tsconfig.json"
-    },
-    {
-      "path": "./test/tsconfig.json"
+      "path": "./packages/exporter/tsconfig.json"
     }
   ],
   "compilerOptions": {
-    "composite": true
+    "module": "commonjs",
+    "sourceMap": true
   },
   "files": []
 }

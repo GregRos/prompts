@@ -1,0 +1,52 @@
+{
+    "folders": [
+        {
+            "path": "./packages/exporter",
+            "name": "exporter"
+        },
+        {
+            "path": "./packages/prompts",
+            "name": "prompts"
+        },
+        {
+            "path": "./packages/obsidian-styles",
+            "name": "obsidian-styles"
+        },
+        {
+            "path": ".",
+            "name": "root"
+        }
+    ],
+    "settings": {
+        "typescript.suggest.autoImports": true,
+        "typescript.suggest.includeCompletionsForImportStatements": true,
+        "typescript.updateImportsOnFileMove.enabled": "always",
+        "typescript.preferences.preferTypeOnlyAutoImports": false,
+        "python.languageServer": "None",
+        "files.exclude": {
+            "packages/exporter": true,
+            "packages/prompts": true,
+            "packages/obsidian-styles": true,
+            "**/coverage": true,
+            "**/CVS": true,
+            "**/__pycache__": true,
+            "**/dist": true,
+            "**/dist/**/*": true,
+            ".nyc_output": true,
+            "coverage": true,
+            "**/node_modules": true,
+            ".yarn": true,
+            ".obsidian": true,
+            "**/.space": true,
+            "**/.obsidian": true,
+            "**/.makemd": true,
+            "**/.trash": true,
+            ".out": true
+        },
+        "search.exclude": {
+            "**/node_modules": true,
+            "**/bower_components": true,
+            "**/*.code-search": true
+        }
+    }
+}

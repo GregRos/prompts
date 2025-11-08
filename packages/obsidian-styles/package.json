@@ -1,0 +1,23 @@
+{
+  "name": "@gregros/prompts-obsidian-styles",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Obsidian CSS styles for prompts workspace",
+  "bugs": {
+    "url": "https://github.com/GregRos/prompts/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github:GregRos/prompts",
+    "directory": "packages/obsidian-styles"
+  },
+  "license": "MIT",
+  "author": "Greg Rosenbaum",
+  "scripts": {
+    "build": "sass --silence-deprecation=color-functions,global-builtin main.scss:../prompts/.obsidian/snippets/custom.css",
+    "watch": "sass --watch --silence-deprecation=color-functions,global-builtin main.scss:../prompts/.obsidian/snippets/custom.css"
+  },
+  "devDependencies": {
+    "sass": "^1.83.4"
+  }
+}

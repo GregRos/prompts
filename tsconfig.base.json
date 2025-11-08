@@ -1,14 +1,21 @@
 {
   "compilerOptions": {
-    "target": "ES2022",
-    "lib": ["ES2022"],
-    "sourceMap": true,
+    "composite": true,
+    "module": "CommonJS",
+    "noImplicitOverride": true,
+    "target": "ES2024",
+    "lib": ["ES2023"],
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "declarationMap": true,
     "noEmit": true,
     "strict": true,
-    "esModuleInterop": true,
-    "declaration": true,
-    "skipLibCheck": true,
-    "declarationMap": true
+    "sourceMap": true,
+    "moduleDetection": "force",
+    "allowJs": true
   },
-  "files": []
+  "include": []
 }
