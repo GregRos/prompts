@@ -1,6 +1,6 @@
-import { RuleFile } from "./rule-indexer.js"
+import { ExtFile } from "./extension-indexer.js"
 
-export function flattenRuleFiles(ruleFiles: RuleFile[]) {
+export function flattenExtFiles(ruleFiles: ExtFile[]) {
     const contents = ruleFiles.map(file => file.body)
     const everything = contents
         .map(x => x.trim())

@@ -5,6 +5,7 @@ import type {} from "rxjs"
 import { frontmatter } from "../../util/frontmatter.js"
 import { Path } from "../../util/pathlib.js"
 import { AgentIndexer } from "../export-agents/agent-indexer.js"
+import { PromptIndexer } from "../export-prompts/prompt.indexer.js"
 import { RefIndexer } from "../export-ref/ref-indexer.js"
 import { RuleIndexer } from "../export-rules/rule-indexer.js"
 import { dumpMarkdown } from "../frontmatter/dump-frontmatter.js"
@@ -19,20 +20,33 @@ export class MasterIndex {
         readonly root: Path,
         readonly agentIndex: AgentIndexer,
         readonly rulesIndexer: RuleIndexer,
-        readonly refIndexer: RefIndexer
+        readonly refIndexer: RefIndexer,
+        readonly promptIndexer: PromptIndexer
     ) {}
     static async create(root: Path): Promise<MasterIndex> {
         const agentIndexer = await AgentIndexer.create(root.join("agents"))
         const ruleIndexer = await RuleIndexer.create(root.join("rules"), "_x")
         const refIndexer = await RefIndexer.create(root.join("refs"))
-        return new MasterIndex(root, agentIndexer, ruleIndexer, refIndexer)
+        const promptIndexer = await PromptIndexer.create(
+            root.join("prompts"),
+            ""
+        )
+
+        return new MasterIndex(
+            root,
+            agentIndexer,
+            ruleIndexer,
+            refIndexer,
+            promptIndexer
+        )
     }
 
     get srcContent() {
         return [
             ...this.agentIndex.srcContent,
             ...this.rulesIndexer.srcContents,
-            ...this.refIndexer.srcContent
+            ...this.refIndexer.srcContent,
+            ...this.promptIndexer.srcContents
         ]
     }
 
@@ -40,7 +54,8 @@ export class MasterIndex {
         const chatModes = this.agentIndex.destContent(root)
         const rules = this.rulesIndexer.destContent(root)
         const refs = this.refIndexer.destContent(root)
-        return [...chatModes, ...rules, ...refs]
+        const prompts = this.promptIndexer.destContent(root)
+        return [...chatModes, ...rules, ...refs, ...prompts]
     }
 
     resolveMarkdown(file: Path, text: string) {

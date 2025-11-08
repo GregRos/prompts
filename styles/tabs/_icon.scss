@@ -5,27 +5,27 @@
 @use "sass:string" as *;
 $name-to-type-to-icon-name: (
     "rules": (
-        "markdown": "rules.md",
+        "markdown": ".rules.md",
         "mk-space": "rules"
     ),
     "agent": (
-        "markdown": "agent.md",
+        "markdown": ".agent.md",
         "mk-space": "agent"
     ),
     "agents": (
-        "markdown": "agent.md",
+        "markdown": ".agent.md",
         "mk-space": "agent"
     ),
     "prompt": (
-        "markdown": "prompt.md",
+        "markdown": ".prompt.md",
         "mk-space": "prompt"
     ),
     "ref": (
-        "markdown": "ref.md",
+        "markdown": ".ref.md",
         "mk-space": "ref"
     ),
     "sec": (
-        "markdown": "sec.md",
+        "markdown": ".sec.md",
         "mk-space": "sec"
     )
 );
@@ -54,6 +54,9 @@ $name-to-type-to-icon-name: (
     @each $label-end, $type-to-icon-name in $name-to-type-to-icon-name {
         @each $data-key, $icon-name in $type-to-icon-name {
             @include when-selected($label-end, $data-key) {
+                @content ($icon-name);
+            }
+            @include when-selected(#{$label-end/_}, $data-key) {
                 @content ($icon-name);
             }
         }

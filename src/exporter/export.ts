@@ -2,6 +2,7 @@ import { frontmatter } from "../util/frontmatter.js"
 import { Path } from "../util/pathlib.js"
 import { dumpMarkdown } from "./frontmatter/dump-frontmatter.js"
 import { MasterIndex } from "./parse-markdown/master-index.js"
+export { PromptIndexer } from "./export-prompts/prompt.indexer.js"
 
 function encodeUriSafe(str: string) {
     return encodeURI(str).replace(":", "%3A")

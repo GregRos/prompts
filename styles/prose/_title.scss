@@ -8,17 +8,6 @@
         margin-bottom: -5px;
         margin-right: 10px;
     }
-    &::before {
-        content: "";
-        justify-self: center;
-        align-self: center;
-        display: inline-block;
-        margin-bottom: -5px;
-        height: 32px;
-        width: 32px;
-        margin-right: 10px;
-        @include icons.set-bg-icon-from-name($icon-name);
-    }
 }
 
 @include tabs.loop-selected-tabs-by-icon using ($icon) {

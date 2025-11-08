@@ -3,32 +3,24 @@
 @use "../_colors/_" as *;
 @use "../_motifs/_" as *;
 @use "sass:map" as *;
-$_rules-file: $img_hammer-page;
-$_rules-folder: $img_yes-no-book;
-$_agent-file: $img_magic-brain;
-$_agent-dir: $img_magic-brain;
-$_prompt-file: $img_bot-message;
-$_prompt-folder: $img_scroll;
-$_ref-file: $img_page;
-$_ref-folder: $img_stack-pages;
-$_main-folder: $img_weird-chip;
-$_sec-file: $img_puzzle;
-$_sec-folder: $img_stack-pages;
 $file-to-icon: (
-    "chatgpt": $img_chatgpt,
-    "copilot": $img_copilot,
-    "agent": $_agent-dir,
-    "agents": $_agent-dir,
-    "agent.md": $_agent-file,
-    "rules.md": $_rules-file,
-    "rules": $_rules-folder,
-    "prompt.md": $_prompt-file,
-    "prompt": $_prompt-folder,
-    "refs": $_ref-folder,
-    "ref.md": $_ref-file,
-    "ref": $_ref-folder,
-    "sec.md": $_sec-file,
-    "sec": $_sec-folder
+    "/chatgpt": $img_chatgpt,
+    "/copilot": $img_copilot,
+    "/prompts": $img_exclaims,
+
+    "/agents": $img_magic-brain,
+    "/refs": $img_stack-pages,
+    ".agent": $img_magic-brain,
+    ".agent.md": $img_magic-brain,
+    ".rules.md": $img_hammer-page,
+    "rules": $img_yes-no-book,
+    ".prompt.md": $img_exclaim,
+    ".prompt": $img_exclaims,
+
+    ".ref.md": $img_page,
+    ".ref": $img_stack-pages,
+    ".sec.md": $img_puzzle,
+    ".sec": $img_stack-pages
 );
 @function bg-line($image) {
     @return url(#{$image}) no-repeat center / contain;
