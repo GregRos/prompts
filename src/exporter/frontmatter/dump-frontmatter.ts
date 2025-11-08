@@ -10,3 +10,8 @@ export function dumpYamlFrontmatter(frontmatter: object) {
     })
     return ["---", dumped.trim(), "---"].join("\n")
 }
+
+export function dumpMarkdown(frontmatter: object, body: string) {
+    const fmString = dumpYamlFrontmatter(frontmatter)
+    return `${fmString}\n\n${body}`
+}

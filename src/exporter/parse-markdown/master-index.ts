@@ -2,10 +2,12 @@ import { doddle } from "doddle"
 import { string } from "parjs"
 import { many, map, or, then } from "parjs/combinators"
 import type {} from "rxjs"
-import type { Path } from "../../util/pathlib.js"
+import { frontmatter } from "../../util/frontmatter.js"
+import { Path } from "../../util/pathlib.js"
 import { AgentIndexer } from "../export-agents/agent-indexer.js"
 import { RefIndexer } from "../export-ref/ref-indexer.js"
 import { RuleIndexer } from "../export-rules/rule-indexer.js"
+import { dumpMarkdown } from "../frontmatter/dump-frontmatter.js"
 import {
     anyCharOrEscape,
     textTillCloserWithAlt
@@ -41,10 +43,10 @@ export class MasterIndex {
         return [...chatModes, ...rules, ...refs]
     }
 
-    resolveMarkdown(file: Path, text: string): string {
-        const noComments = text
+    resolveMarkdown(file: Path, text: string) {
+        const parsed = frontmatter(text)
         const linkParser = this._internalLinkParser.pull()
-        let result = noComments
+        let result = parsed.body
         for (let i = 0; i < 2; i++) {
             try {
                 result = pRemovePercentComments.parse(result).value
@@ -59,8 +61,18 @@ export class MasterIndex {
                 )
             }
         }
-
-        return linkParser.parse(noComments).value
+        const resolveToolReferences = /\`#([a-zA-Z0-9:_-]+)\`/g
+        result = result.replace(
+            resolveToolReferences,
+            (_, toolName) => `#${toolName}`
+        )
+        return {
+            body: result,
+            frontmatter: parsed.frontmatter,
+            raw() {
+                return dumpMarkdown(parsed.attributes!, result)
+            }
+        }
     }
 
     private _internalLinkParser = doddle(() => {
@@ -70,6 +82,19 @@ export class MasterIndex {
         const interLink = embedOrLink.pipe(
             then(textTillCloserWithAlt("]]")),
             map(([type, x]) => {
+                if (x.main.endsWith(".sec")) {
+                    const tagName = x.main.replace(".sec", "").replace(/^_/, "")
+                    if (type === "embed") {
+                        const content = this.getSrcFileContent(x.main)
+                        const result = [
+                            `<${tagName}>`,
+                            content.trim(),
+                            `</${tagName}>`
+                        ].join("\n")
+                        return result
+                    }
+                    return `<${tagName}>`
+                }
                 if (type === "embed") {
                     return this.getSrcFileContent(x.main)
                 }
@@ -79,7 +104,11 @@ export class MasterIndex {
                 const linkTarget = interlinkTarget
                     .toString()
                     .replaceAll("\\", "/")
-                return `[${linkText}](${linkTarget})`
+                const encoded = `vscode-userdata:${linkTarget}`
+                if (!linkText) {
+                    return `[](${encoded})`
+                }
+                return `[${linkText}](${encoded})`
             }),
             or(anyCharOrEscape.pipe(map(x => x))),
             many(),
@@ -88,20 +117,26 @@ export class MasterIndex {
         return interLink
     })
 
-    getSrcFileContent(name: string): string | undefined {
-        return this.srcContent.find(file =>
-            file.path.withExtension("").toString().endsWith(name)
-        )?.content
+    getSrcFileContent(name: string): string {
+        const file = this.srcContent.find(file =>
+            file.path.withExtension("").toString().endsWith(`/${name}`)
+        )
+        if (!file) {
+            throw new Error(`Could not find src file for interlink ${name}`)
+        }
+        return this.resolveMarkdown(file.path, file.content).body
     }
 
     getDestFileByName(name: string): string {
         const destFiles = this.destContent(this.root)
         const destFile = destFiles.find(file =>
-            file.src.withExtension("").toString().endsWith(name)
+            file.src.withExtension("").toString().endsWith(`/${name}`)
         )
         if (!destFile) {
             throw new Error(`Could not find dest file for interlink ${name}`)
         }
-        return destFile.path.toString()
+        const p = this.root.relative(destFile.path).toString()
+
+        return p
     }
 }

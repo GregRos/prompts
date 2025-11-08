@@ -1,4 +1,4 @@
-import type { Path } from "../../util/pathlib.js"
+import { Path } from "../../util/pathlib.js"
 import { RuleIndexer } from "../export-rules/rule-indexer.js"
 import { DestContent } from "../src-dest.js"
 
@@ -27,18 +27,37 @@ export class AgentFile {
     }
 }
 
+export class SectionFile {
+    constructor(
+        readonly path: Path,
+        readonly content: string
+    ) {}
+
+    static async create(path: Path): Promise<SectionFile> {
+        const content = await path.readFile("utf-8")
+        return new SectionFile(path, content)
+    }
+}
+
 export class Agent {
     constructor(
         readonly name: string,
         readonly agentFile: AgentFile,
-        readonly ruleIndexer: RuleIndexer
+        readonly ruleIndexer: RuleIndexer,
+        readonly secFiles: SectionFile[]
     ) {}
 
     destContent(root: Path): DestContent[] {
         const f = [
             this.agentFile.destContent(root),
             ...this.ruleIndexer.destContent(root)
-        ]
+        ].map(dc => {
+            return DestContent.dest(
+                dc.src,
+                Path(dc.path.path.replace(".agent", ".chatmode")),
+                dc.content
+            )
+        })
         return f
     }
 
@@ -46,7 +65,7 @@ export class Agent {
         const ruleFiles = this.ruleIndexer.ruleGroups.flatMap(
             grp => grp.srcContent
         )
-        return [this.agentFile.srcContent, ...ruleFiles]
+        return [this.agentFile.srcContent, ...ruleFiles, ...this.secFiles]
     }
 
     static async create(path: Path): Promise<Agent> {
@@ -56,8 +75,14 @@ export class Agent {
             path.join("rules"),
             path.basename
         )
+        const secFilePaths = await path.glob("*.sec.md", { onlyFiles: true })
+        secFilePaths.sort((a, b) => (a.path < b.path ? -1 : 1))
+        const secFilePromises = secFilePaths.map(secPath =>
+            SectionFile.create(secPath)
+        )
+        const secFiles = await Promise.all(secFilePromises)
 
-        return new Agent(path.basename, chatModeFile, ruleFiles)
+        return new Agent(path.basename, chatModeFile, ruleFiles, secFiles)
     }
 }
 
