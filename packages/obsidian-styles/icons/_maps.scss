@@ -4,12 +4,12 @@
 @use "../_motifs/_" as *;
 @use "sass:map" as *;
 $file-to-icon: (
-    "/chatgpt": $img_chatgpt,
-    "/copilot": $img_copilot,
-    "/prompts": $img_exclaims,
+    "chatgpt": $img_chatgpt,
+    "copilot": $img_copilot,
+    "prompts": $img_exclaims,
 
-    "/agents": $img_magic-brain,
-    "/refs": $img_stack-pages,
+    "gents": $img_magic-brain,
+    "refs": $img_stack-pages,
     ".agent": $img_magic-brain,
     ".agent.md": $img_magic-brain,
     ".rules.md": $img_hammer-page,

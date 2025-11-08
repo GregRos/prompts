@@ -130,8 +130,19 @@ export class MasterIndex {
     })
 
     getSrcFileContent(name: string): string {
+        if (name.includes("/")) {
+            const relPath = this.root.join(name)
+            console.log(`Resolving interlink by path: ${relPath}`)
+            const relPaths = this.srcContent.map(x =>
+                this.root.relative(x.path).toString()
+            )
+            return this.srcContent.find(
+                file =>
+                    this.root.relative(file.path).toString() === `${name}.md`
+            )!.content
+        }
         const file = this.srcContent.find(file =>
-            file.path.withExtension("").toString().endsWith(`/${name}`)
+            file.path.withExtension("").toString().endsWith(`${name}`)
         )
         if (!file) {
             throw new Error(`Could not find src file for interlink ${name}`)

@@ -1,0 +1,7 @@
+{
+  "userIgnoreFilters": [
+    "node_modules/"
+  ],
+  "alwaysUpdateLinks": true,
+  "promptDelete": false
+}

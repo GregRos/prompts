@@ -6,7 +6,7 @@
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["tsx", "${workspaceFolder}/src/exporter/main.ts"],
+      "runtimeArgs": ["tsx", "${workspaceFolder}/src/main.ts"],
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
@@ -18,7 +18,7 @@
       "type": "node",
       "request": "launch",
       "runtimeExecutable": "node",
-      "program": "${workspaceFolder}/dist/exporter/main.js",
+      "program": "${workspaceFolder}/dist/main.js",
       "runtimeArgs": [
         "--enable-source-maps",
         "--async-stack-traces",

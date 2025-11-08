@@ -1,0 +1,11 @@
+{
+  "cssTheme": "Tokyo Night",
+  "textFontFamily": "Fira Sans",
+  "monospaceFontFamily": "FiraCode Nerd Font Mono",
+  "baseFontSize": 20,
+  "interfaceFontFamily": "FiraCode Nerd Font Mono",
+  "enabledCssSnippets": [
+    "test",
+    "custom"
+  ]
+}

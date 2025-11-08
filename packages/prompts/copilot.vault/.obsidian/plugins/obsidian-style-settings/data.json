@@ -1,0 +1,14 @@
+{
+  "blue-topaz-theme@@color-scheme-options": "color-scheme-options-default",
+  "blue-topaz-theme@@interactive-accent@@light": "#2AB07A",
+  "kakano-style@@theme-setting-predefinedBaseColor": "theme-setting-baseColorPreset-maawhero",
+  "royal-velvet@@inline-document-title-color": "doc-title-h3",
+  "Editor@@h1-color@@light": "#9D86FF",
+  "Editor@@h2-color@@light": "#3DFF96",
+  "Editor@@h2-color@@dark": "#3DFF00",
+  "Editor@@h1-color@@dark": "#FF70F7",
+  "Editor@@h3-color@@dark": "#F02FFF",
+  "Editor@@h4-color@@dark": "#FFAD14",
+  "Editor@@h5-color@@dark": "#FF3567",
+  "Appearance@@text-normal@@dark": "#FFFFFF"
+}

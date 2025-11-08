@@ -15,7 +15,7 @@
   "author": "Greg Rosenbaum",
   "scripts": {
     "build": "sass --silence-deprecation=color-functions,global-builtin main.scss:../prompts/.obsidian/snippets/custom.css",
-    "watch": "sass --watch --silence-deprecation=color-functions,global-builtin main.scss:../prompts/.obsidian/snippets/custom.css"
+    "watch": "sass --watch --silence-deprecation=color-functions,global-builtin main.scss:../prompts/copilot.vault/.obsidian/snippets/custom.css"
   },
   "devDependencies": {
     "sass": "^1.83.4"
