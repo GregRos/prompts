@@ -1,6 +1,13 @@
 {
   "python.languageServer": "None",
   "typescript.preferences.preferTypeOnlyAutoImports": false,
+  "files.associations": {
+    "*.rules.md": "instructions",
+    "**/*.rules/_.md": "instructions",
+    "**/*.agent/_.md": "chatagent",
+    "**/*.agent": "chatagent",
+    "**/*.prompt/_.md": "prompt"
+  },
   "files.exclude": {
     "node_modules": true,
     "dist": true,

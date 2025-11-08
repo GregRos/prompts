@@ -7,14 +7,17 @@
       "option": "watch",
       "problemMatcher": ["$tsc-watch"],
       "group": "build",
-      "label": "tsc: watch - tsconfig.json"
+      "label": "tsc: watch - tsconfig.json",
+      "runOptions": {
+        "runOn": "folderOpen"
+      }
     },
     {
       "type": "shell",
       "label": "Watch SCSS",
-      "command": "npx sass --watch styles/main.scss:copilot.vault/.obsidian/snippets/custom.css",
+      "command": "npx sass --watch --silence-deprecation=color-functions,global-builtin styles/main.scss:copilot.vault/.obsidian/snippets/custom.css",
       "isBackground": true,
-      "problemMatcher": ["$sas"],
+      "problemMatcher": ["$node-sass"],
       "runOptions": {
         "runOn": "folderOpen"
       }
