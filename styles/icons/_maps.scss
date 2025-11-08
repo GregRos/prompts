@@ -12,6 +12,8 @@ $_prompt-folder: $img_scroll;
 $_ref-file: $img_page;
 $_ref-folder: $img_stack-pages;
 $_main-folder: $img_weird-chip;
+$_sec-file: $img_puzzle;
+$_sec-folder: $img_stack-pages;
 $file-to-icon: (
     "chatgpt": $img_chatgpt,
     "copilot": $img_copilot,
@@ -22,8 +24,11 @@ $file-to-icon: (
     "rules": $_rules-folder,
     "prompt.md": $_prompt-file,
     "prompt": $_prompt-folder,
+    "refs": $_ref-folder,
     "ref.md": $_ref-file,
-    "ref": $_ref-folder
+    "ref": $_ref-folder,
+    "sec.md": $_sec-file,
+    "sec": $_sec-folder
 );
 @function bg-line($image) {
     @return url(#{$image}) no-repeat center / contain;

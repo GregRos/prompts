@@ -12,22 +12,22 @@
     --nav-item-background-hover: transparent $IMP;
 }
 
-.mk-tree-node:has(.is-active) {
-    background-color: $explorer-selected-bg $IMP;
+.tree-item-self {
+    border-radius: 6px;
+    &.is-active:not(.has-focus) {
+        background-color: $explorer-active-bg $IMP;
+    }
+    &.has-focus {
+        background-color: $explorer-selected-bg $IMP;
+    }
+    &:hover {
+        background-color: $explorer-hover-bg $IMP;
+    }
+    font-size: 1em;
 }
 
 .mk-tree-node:hover {
     background-color: $explorer-hover-bg $IMP;
-    border-radius: 6px;
-}
-.mk-tree-node {
-    border-radius: 6px;
-    &:has(.is-active:not(.is-selected)) {
-        background-color: $explorer-active-bg $IMP;
-    }
-    &:has(.is-selected) {
-        background-color: $explorer-selected-bg $IMP;
-    }
 }
 
 .nav-folder-title-content {

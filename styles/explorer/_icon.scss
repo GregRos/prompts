@@ -1,15 +1,26 @@
 @use "../_common/_" as *;
 @use "../icons/_" as icons;
 @mixin _explorer-icon($icon) {
+    .tree-item-inner {
+        @include icons.before_icon($icon, 22px) {
+            vertical-align: middle $IMP;
+            margin-right: 8px $IMP;
+        }
+    }
     .mk-path-icon button {
         svg {
             visibility: hidden $IMP;
         }
-        @include icons.set-bg-icon($icon);
     }
 }
 @each $label-end, $icon in icons.$file-to-icon {
-    .mk-tree-item[data-path$="#{$label-end}"] {
+    .tree-item-self[data-path$="#{$label-end}"] {
         @include _explorer-icon($icon);
+    }
+    .tree-item-self[data-path$="#{$label-end}/_.md"] {
+        @include _explorer-icon($icon);
+        @at-root .nav-file:has(&) {
+            border-left: 1px solid yellow $IMP;
+        }
     }
 }

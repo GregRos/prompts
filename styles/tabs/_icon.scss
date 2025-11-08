@@ -2,6 +2,7 @@
 @use "../_common/_" as *;
 @use "../_colors/_" as *;
 @use "sass:map" as map;
+@use "sass:string" as *;
 $name-to-type-to-icon-name: (
     "rules": (
         "markdown": "rules.md",
@@ -22,6 +23,10 @@ $name-to-type-to-icon-name: (
     "ref": (
         "markdown": "ref.md",
         "mk-space": "ref"
+    ),
+    "sec": (
+        "markdown": "sec.md",
+        "mk-space": "sec"
     )
 );
 
@@ -88,6 +93,7 @@ $name-to-type-to-icon-name: (
     @include _tab-icon("ref");
     @include icons.set-color-from-icon-name("ref");
 }
+
 .workspace-tab-header-container-inner {
     flex-wrap: wrap $IMP;
 }

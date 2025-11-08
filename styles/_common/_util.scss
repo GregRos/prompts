@@ -1,0 +1,14 @@
+@use "sass:string" as string;
+
+$IMP: string.unquote("!important");
+@function ends-with($str, $suffix) {
+    $len-s: string.length($str);
+    $len-x: string.length($suffix);
+    @if $len-x == 0 {
+        @return true;
+    }
+    @if $len-x > $len-s {
+        @return false;
+    }
+    @return string.slice($str, -$len-x) == $suffix;
+}

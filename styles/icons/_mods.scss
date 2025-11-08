@@ -2,19 +2,27 @@
 @use "./_maps.scss" as icons;
 @use "sass:map";
 
-@mixin _bc-icon($icon) {
+@mixin before_icon($icon, $size) {
     &::before {
         content: "";
+        height: $size;
+        width: $size;
         display: inline-block;
-        height: 12px;
-        width: 12px;
-        margin-bottom: -2px;
-        margin-right: 6px;
-        background: bg-line($icon);
+        @if starts-with($icon, "http") {
+            @include icons.set-bg-icon($icon);
+        } @else {
+            @include icons.set-bg-icon-from-name($icon);
+        }
+        @content;
     }
 }
 
-@mixin insert_explorer_icon() {
+@mixin _bc-icon($icon) {
+    @include before_icon($icon, 16px) {
+        margin-bottom: -2px;
+        margin-right: 6px;
+        margin-right: 8px;
+    }
 }
 
 @mixin insert-bc-icon() {
@@ -24,8 +32,3 @@
         }
     }
 }
-
-@mixin insert-title-icon() {
-}
-
-@include insert_explorer_icon();
