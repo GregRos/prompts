@@ -1,7 +1,6 @@
 # Python packages
 
 ## Production
-PREFER `argparse` for argument parsing
 PREFER `keyboard` for accessing keyboard
 PREFER `mouse` for accessing mouse
 
