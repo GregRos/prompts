@@ -1,30 +1,35 @@
 # JavaScript Packages
-This is a set of preferred JS/TS libraries for various tasks.
+This is a list of org-wide preferred JavaScript/TypeScript packages. Use them instead of anything else for the same functionality.
 ## Production
-PREFER `got` for http requests
-PREFER `ws` for websockets
-PREFER `zod` for validation
-PREFER `yargs` for cli parsing
-PREFER `chalk` for ANSI color
-PREFER `js-yaml` for YAML
-PREFER `globby` for file globbing
-PREFER `chokidar` for file watching
-PREFER `execa` for process spawning
-PREFER `sharp` for image processing
-PREFER `winston` for logging
-PREFER `yamprint` for stringifying objects
-PREFER `keyv` for caching
+Packages used in runtime code:
+
+- got: http requests
+- ws: websockets
+- zod: validation
+- yargs: cli parsing
+- chalk: ANSI color
+- js-yaml: YAML
+- globby: file globbing
+- chokidar: file watching
+- execa: process spawning
+- sharp: image processing
+- winston: logging
+- yamprint: stringifying objects
+- keyv: caching
+- @keyv/memcache: in-memory caching
+
 ## Development
-PREFER `@keyv/memcache` for in-memory caching
-PREFER `npm-run-all` for running multiple commands
-PREFER `prettier` for code formatting
-PREFER `eslint` for linting
-PREFER `@gregros/eslint-config` as eslint preset
-PREFER `tsx` for running typescript
-PREFER `nodemon` for restarting on change
-PREFER `jest` for testing
-PREFER `ts-jest` for loading ts in jest
-PREFER `esbuild` for bundling pure js/ts
-PREFER `parcel` for bundling simple sites
-PREFER `shx` for cross-platform shell-like scripting
+Packages used during development:
+
+- npm-run-all: running multiple commands
+- prettier: code formatting
+- eslint: linting
+- @gregros/eslint-config: eslint preset
+- tsx: running typescript
+- nodemon: restarting on change
+- jest: testing
+- ts-jest: loading ts in jest
+- esbuild: bundling pure js/ts
+- parcel: bundling simple sites
+- shx: cross-platform shell-like scripting
 
