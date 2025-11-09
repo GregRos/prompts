@@ -142,7 +142,7 @@ export class MasterIndex {
             )!.content
         }
         const file = this.srcContent.find(file =>
-            file.path.withExtension("").toString().endsWith(`${name}`)
+            file.path.withExtension("").toString().endsWith(`/${name}`)
         )
         if (!file) {
             throw new Error(`Could not find src file for interlink ${name}`)
