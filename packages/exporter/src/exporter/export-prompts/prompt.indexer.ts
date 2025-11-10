@@ -67,11 +67,22 @@ export class PromptGroup {
         )
         const secFiles = await Promise.all(secFilePromises)
 
-        return new PromptGroup(path.basename, chatModeFile, secFiles)
+        return new PromptGroup(
+            path.withExtension("").basename,
+            chatModeFile,
+            secFiles
+        )
     }
 }
 
 export class PromptIndexer {
+    findPromptByName(name: string) {
+        const group = this.agents.find(a => a.name === name)
+        if (!group) {
+            throw new Error(`Prompt group not found: ${name}`)
+        }
+        return group
+    }
     destContent(root: Path) {
         return this.agents.flatMap(cm => cm.destContent(root))
     }

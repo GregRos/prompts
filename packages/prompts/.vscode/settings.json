@@ -1,9 +1,1 @@
-{
-  "files.associations": {
-    "*.rules.md": "instructions",
-    "**/*.rules/_.md": "instructions",
-    "**/*.agent/_.md": "chatagent",
-    "**/*.agent": "chatagent",
-    "**/*.prompt/_.md": "prompt"
-  }
-}
+{}

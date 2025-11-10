@@ -8,6 +8,11 @@ function encodeUriSafe(str: string) {
     return encodeURI(str).replace(":", "%3A")
 }
 
+function asVscodeUserdataLink(path: Path) {
+    const encoded = encodeUriSafe(path.toString())
+    return `vscode-userdata:/${encoded}`
+}
+
 export async function runExport(sourceDir: string, destDir: string) {
     const sourcePath = Path(sourceDir)
     const destRoot = Path(destDir)
@@ -26,14 +31,35 @@ export async function runExport(sourceDir: string, destDir: string) {
             `${relSrc}: Writing ${write.content.length} bytes to ${relDest}`
         )
         let contents = write.content.trim()
-        contents = contents.replaceAll(
-            /\[\]\((vscode-userdata:)([^\)]+)\)/g,
-            (_, protocol, file) => {
-                const resolved = destRoot.join(file).toString()
-                const encoded = encodeUriSafe(resolved)
-                return `'${protocol}/${encoded}'`
-            }
-        )
+        contents = contents
+            .replaceAll(
+                /\((vscode-userdata:)([^\)]+)\)/g,
+                (_, protocol, file) => {
+                    const resolved = destRoot.join(file).toString()
+                    const encoded = encodeUriSafe(resolved)
+                    return `(${protocol}/${encoded})`
+                }
+            )
+            .replaceAll("#{", "${")
+            .replaceAll("\\<", "<")
+            .replaceAll(
+                // Parse /xyz at start of line
+                /^\/([/\w-_]+)/gm,
+                (_, command) => {
+                    const promptFile = masterIndex.findPromptByName(command)
+                    if (!promptFile) {
+                        throw new Error(
+                            `Cannot resolve prompt reference: /${command}`
+                        )
+                    }
+                    const promptFilePath = destRoot.join(
+                        `_${promptFile.name}.prompt.md`
+                    )
+                    return `Run [${promptFile.name}](${asVscodeUserdataLink(
+                        promptFilePath
+                    )})`
+                }
+            )
         if (relDest.endsWith(".instructions.md")) {
             const newFm = frontmatter<any>(contents)
             if (!newFm.attributes?.applyTo) {

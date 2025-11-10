@@ -2,7 +2,7 @@
 @use "../icons/_" as icons;
 @mixin _explorer-icon($icon) {
     .tree-item-inner {
-        @include icons.before_icon($icon, 22px) {
+        @include icons.before_icon($icon, 16px) {
             vertical-align: middle $IMP;
             margin-right: 8px $IMP;
         }

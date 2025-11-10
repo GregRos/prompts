@@ -38,6 +38,10 @@ export class MasterIndex {
         )
     }
 
+    findPromptByName(name: string) {
+        return this.promptIndexer.findPromptByName(name)
+    }
+
     get srcContent() {
         return [
             ...this.agentIndex.srcContents,
