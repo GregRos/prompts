@@ -1,3 +1,8 @@
+---
+aliases:
+  - ref packages py
+---
+
 # Python packages
 This is a list of preferred Python packages that should be used in org-wide contexts. You should use these instead of anything else for the same purpose.
 ## Production

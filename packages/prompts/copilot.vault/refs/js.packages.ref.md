@@ -1,3 +1,8 @@
+---
+aliases:
+  - ref packages js
+---
+
 # JavaScript Packages
 This is a list of org-wide preferred JavaScript/TypeScript packages. Use them instead of anything else for the same functionality.
 ## Production
