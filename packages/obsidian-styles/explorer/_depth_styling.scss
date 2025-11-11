@@ -1,0 +1,101 @@
+@use "sass:map";
+@use "../_common/" as *;
+@use "../icons/_" as icons;
+@use "../icons/images" as *;
+@mixin _folder_at_depth($depth) {
+    // We construct a selector that targets folders at the specified depth
+    // Initial selector is .nav-files-container > div
+    $sel: " > .nav-folder";
+
+    @while $depth > 0 {
+        $sel: "#{$sel} > .nav-folder-children > .nav-folder";
+        $depth: $depth - 1;
+    }
+
+    .nav-files-container > div #{$sel} {
+        @content;
+    }
+}
+@mixin _folder-item-at-depth($depth) {
+    @include _folder_at_depth($depth) {
+        & > .tree-item-self {
+            @content;
+        }
+    }
+}
+
+$_colors: (
+    0: #eb7979,
+    1: #66e466,
+    2: #6f6ffd,
+    3: #ff00ff,
+    4: #00ffff,
+    5: #ffff00
+);
+
+$_weights: (
+    0: 700,
+    1: 700,
+    2: 600,
+    3: 600,
+    4: 500,
+    5: 500
+);
+
+@each $i, $color in $_colors {
+    @include _folder_at_depth($i) {
+        & > .tree-item-self {
+            .nav-folder-title-content {
+                color: $color $IMP;
+                font-weight: map.get($_weights, $i) $IMP;
+                font-size: #{max(1.3em * pow(0.92, $i / 2), 1em)} $IMP;
+            }
+        }
+        .nav-folder-children {
+        }
+    }
+}
+
+@mixin _explorer-icon($icon) {
+    .nav-file-title-content {
+        margin-left: -25px;
+    }
+    @include icons.after_icon($icon, 20px) {
+        position: absolute;
+        right: 0;
+        vertical-align: middle $IMP;
+        margin-left: 8px $IMP;
+    }
+}
+
+.tree-item-children {
+    margin-left: 20px $IMP;
+}
+
+@each $label-end, $icon in icons.$file-to-icon {
+    .tree-item-self[data-path$="#{$label-end}"] {
+        @include _explorer-icon($icon);
+    }
+    .tree-item-self[data-path$="#{$label-end}/_.md"] {
+        @include _explorer-icon($icon);
+    }
+}
+
+.collapse-icon {
+    svg {
+        visibility: hidden $IMP;
+    }
+    display: block $IMP;
+    align-self: flex-start $IMP;
+    $size: 24px;
+    margin-top: -2px;
+    margin-inline-start: calc(-1 * var(--size-4-5) * 1.4) $IMP;
+    width: $size $IMP;
+    &.is-collapsed {
+        @include icons.before_icon($img_folder-closed, $size);
+    }
+    &:not(.is-collapsed) {
+        filter: hue-rotate(190deg) $IMP;
+        @include icons.before_icon($img_folder-open, $size);
+    }
+}

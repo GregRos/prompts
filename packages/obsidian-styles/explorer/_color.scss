@@ -1,5 +1,6 @@
 @use "../_common/_" as *;
 @use "../_colors/_" as *;
+@use "../icons/_" as *;
 @for $i from 1 through 100 {
     .mk-tree-node[data-index="#{$i}"] {
         @if $i % 2 == 1 {
@@ -12,27 +13,25 @@
     --nav-item-background-hover: transparent $IMP;
 }
 
+.tree-item-children {
+}
+
+.tree-item {
+    border-radius: none;
+    margin-top: -1px;
+}
+
 .tree-item-self {
-    border-radius: 6px;
-    &.is-active:not(.has-focus) {
+    &.is-active:not(.has-focus, .fn-is-active) {
         background-color: $explorer-active-bg $IMP;
     }
-    &.has-focus {
+    &:where(.has-focus, .fn-is-active) {
         background-color: $explorer-selected-bg $IMP;
     }
     &:hover {
         background-color: $explorer-hover-bg $IMP;
     }
     font-size: 1em;
-}
-
-.mk-tree-node:hover {
-    background-color: $explorer-hover-bg $IMP;
-}
-
-.nav-folder-title-content {
-    font-weight: 600 $IMP;
-    color: $folder-color $IMP;
 }
 
 .nav-file-title-content {
