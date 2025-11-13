@@ -1,28 +1,37 @@
+import { frontmatter } from "../../util/frontmatter.js"
 import { Path } from "../../util/pathlib.js"
+import { dumpMarkdown } from "../frontmatter/dump-frontmatter.js"
+import { Frontmatter } from "../frontmatter/load-frontmatter.js"
 import { DestContent } from "../src-dest.js"
 
 export class PromptFile {
     constructor(
         readonly path: Path,
-        readonly content: string
+        readonly frontmatter: Frontmatter,
+        readonly body: string
     ) {}
 
     get _targetName() {
-        return `_${this.path.parent().basename}.md`
+        return `_CRITICAL_${this.path.parent().basename}.md`
     }
 
     static async fromPath(path: Path): Promise<PromptFile> {
         const content = await path.readFile("utf-8")
-        return new PromptFile(path, content)
+        const fm = frontmatter(content)
+        return new PromptFile(path, fm.attributes as {}, fm.body)
     }
 
     destContent(root: Path): DestContent {
         const destPath = root.join(this._targetName)
-        return DestContent.dest(this.path, destPath, this.content)
+        return DestContent.dest(
+            this.path,
+            destPath,
+            dumpMarkdown(this.frontmatter, this.body)
+        )
     }
 
     get srcContent() {
-        return DestContent.src(this.path, this.content)
+        return DestContent.src(this.path, this.body)
     }
 }
 

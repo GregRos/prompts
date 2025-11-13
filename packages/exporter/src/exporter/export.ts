@@ -53,7 +53,7 @@ export async function runExport(sourceDir: string, destDir: string) {
                         )
                     }
                     const promptFilePath = destRoot.join(
-                        `_${promptFile.name}.prompt.md`
+                        `_CRITICAL_${promptFile.name}.prompt.md`
                     )
                     return `Run [${promptFile.name}](${asVscodeUserdataLink(
                         promptFilePath

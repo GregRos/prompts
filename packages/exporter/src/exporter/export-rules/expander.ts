@@ -53,6 +53,13 @@ const replaceRegex = /\$\{(\w+)\}/
 function expandApplyTo(applyTo: string): string {
     const match = applyTo.match(replaceRegex)
     if (!match) {
+        // If it's a path or glob (contains path separators, wildcards, or a file extension like `a.txt`), return it as-is.
+        const pathOrGlobRegex = /(^\.{0,2}[\/\\])|[\/\\]|[*?]|\.[a-z0-9]+$/i
+        if (pathOrGlobRegex.test(applyTo)) {
+            return applyTo
+        }
+    }
+    if (!match) {
         throw new Error(`applyTo does not match regex: ${applyTo}`)
     }
     const code = match[1]

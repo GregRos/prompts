@@ -114,14 +114,14 @@ export class ExtensionGroup {
             `.${this.targetExt}`
         )
         nameBit = [ns, nameBit].filter(x => x).join(".")
-        const destx = `_${nameBit}`
+        const destx = `_CRITICAL_${nameBit}`
         const index = this.srcIndexFile
         const d = DestContent.dest(index.src, root.join(destx), rf.data)
         return d
     }
 
     private get _targetPath() {
-        const ruleDest = `_${this.root.basename}.instructions.md`
+        const ruleDest = `_CRITICAL_${this.root.basename}.instructions.md`
         return ruleDest
     }
 

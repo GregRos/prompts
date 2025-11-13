@@ -70,10 +70,7 @@ export class MasterIndex {
             } catch (e: any) {
                 const relFile = this.root.relative(file)
                 throw new Error(
-                    `While parsing ${relFile}, failed to resolve link: ${e.message}`,
-                    {
-                        cause: e
-                    }
+                    `While parsing ${relFile}, failed to resolve link: ${e.message}\n${e.stack}`
                 )
             }
         }

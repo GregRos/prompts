@@ -9,7 +9,7 @@ export class AgentFile {
     ) {}
 
     get _targetName() {
-        return `_${this.path.parent().basename}.md`
+        return `_CRITICAL_${this.path.parent().basename}.md`
     }
 
     static async fromPath(path: Path): Promise<AgentFile> {

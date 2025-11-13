@@ -1,5 +1,5 @@
 export function fixExportedFileName(name: string) {
-    return `_${name.replace(".rules.md", ".instructions.md")}`
+    return `_CRITICAL_${name.replace(".rules.md", ".instructions.md")}`
 }
 
 export function fixExportedPath(path: string) {
