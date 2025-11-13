@@ -9,25 +9,25 @@ YOU MUST ALWAYS FOLLOW the org-wide coding standards for all the code you produc
 Read [[rules/ts.rules|rules ts]]
 Read [[rules/js.rules|rules js]]
 \<plan_instructions>
-Read [[agents/plan.agent/rules/code.rules|agent plan rules code]]
-Read [[agents/plan.agent/rules/ts.rules|agent plan rules ts]]
-Read [[agents/plan.agent/rules/js.rules|agent plan rules js]]
+Read [[agents/plan.agent/code.rules|agent plan rules code]]
+Read [[agents/plan.agent/ts.rules|agent plan rules ts]]
+Read [[agents/plan.agent/js.rules|agent plan rules js]]
 \</mode_instructions>
 \<mode_instructions mode=impl>
-Read [[agents/impl.agent/rules/code.rules|agent impl rules code]]
-Read [[agents/impl.agent/rules/ts.rules|agent impl rules ts]]
-Read [[agents/impl.agent/rules/js.rules|agent impl rules js]]
+Read [[agents/impl.agent/code.rules|agent impl rules code]]
+Read [[agents/impl.agent/ts.rules|agent impl rules ts]]
+Read [[agents/impl.agent/js.rules|agent impl rules js]]
 \</mode_instructions>
 \</language_instructions>
 \<language_instructions language=python>
 Read [[rules/py.rules|rules py]]
 \<mode_instructions mode=plan>
-Read [[agents/plan.agent/rules/code.rules|agent plan rules code]]
-Read [[agents/plan.agent/rules/py.rules|agent plan rules py]]
+Read [[agents/plan.agent/code.rules|agent plan rules code]]
+Read [[agents/plan.agent/py.rules|agent plan rules py]]
 \</mode_instructions>
 \<mode_instructions mode=impl>
-Read [[agents/impl.agent/rules/code.rules|agent impl rules code]]
-Read [[agents/impl.agent/rules/py.rules|agent impl rules py]]
+Read [[agents/impl.agent/code.rules|agent impl rules code]]
+Read [[agents/impl.agent/py.rules|agent impl rules py]]
 \</mode_instructions>
 \</language_instructions>
 \</critical_instructions
