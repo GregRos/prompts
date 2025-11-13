@@ -8,5 +8,5 @@ If #{input:repo} does not specify an owner, assume it's GregRos.
 If #{input:repo} does not specify a provider, assume it's GitHub.
 If #{input:repo} does not make sense in this context, or is not given, immediately respond with an error.
 
-![[prompts/act-immediately.prompt/_|_]]
-![[prompts/error.prompt/_|_]]
+![[act-immediately.prompt|_]]
+![[error.prompt|_]]

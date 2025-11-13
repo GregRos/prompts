@@ -13,4 +13,4 @@ Read [[js.packages.ref|ref packages js]]
 # if #{input:language} ≈ Python
 Read [[py.packages.ref|ref packages py]]
 
-![[prompts/error.prompt/_|_]]
+![[error.prompt|_]]

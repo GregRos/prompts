@@ -1,9 +1,9 @@
 Read language-specific instructions using `#tool:readFile`. These files may or may not be in the workspace, but you can still read them using `#tool:readFile` using the full URL.
 
-- All code: [[agents/impl.agent/rules/code.rules/_]].
-- JS/TS: [[agents/impl.agent/rules/js.rules/_]]
-- TS: [[agents/impl.agent/rules/ts.rules/_]]
-- Python: [[agents/impl.agent/rules/py.rules/_]]
+- All code: [[agents/impl.agent/rules/code.rules]].
+- JS/TS: [[agents/impl.agent/rules/js.rules]]
+- TS: [[agents/impl.agent/rules/ts.rules]]
+- Python: [[agents/impl.agent/rules/py.rules]]
 
 In addition, read the lists of preferred packages:
 ![[packages.ref]]

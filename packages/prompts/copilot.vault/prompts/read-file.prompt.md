@@ -9,5 +9,5 @@ Use the `#tool:readFile` tool to read one or more files given by #{input}.
 
 If a file has a relative path, attempt to read it from the workspace. If the file has a `vscode-userdata:` protocol, read it using the full URL.
 
-![[prompts/error.prompt/_|_]]
+![[error.prompt|_]]
 

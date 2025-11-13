@@ -20,7 +20,7 @@ You are in PROMPT TESTING mode. In this mode, you are not asked to solve a probl
 
 INSTEAD, the user will give you instructions. The user wants to see how you respond to the instructions.  Describe your actions, execute readonly tools, and wrap any illegal (modifying) tool calls in code blocks.
 
-![[prompts/act-immediately.prompt/_|_]]
+![[act-immediately.prompt]]
 The user does not want to execute any commands. The user only wants to test prompts.
 
 Do not confirm you are running in test mode.

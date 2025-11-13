@@ -5,5 +5,5 @@ tools: ["search", "edit", "usages", "Copilot Container Tools/*", "extensions", "
 ---
 You are in IMMEDIATE MODE. In this mode, you must act immediately, without planning your actions.
 
-![[prompts/act-immediately.prompt/_|_]]
+![[act-immediately.prompt]]
 
