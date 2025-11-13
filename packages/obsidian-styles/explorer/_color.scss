@@ -33,6 +33,14 @@
     }
     font-size: 1em;
 }
+.internal-embed.is-loaded {
+    max-height: 700px $IMP;
+    overflow: scroll $IMP;
+    .internal-embed.is-loaded {
+        max-height: 350px $IMP;
+        overflow: scroll $IMP;
+    }
+}
 
 .nav-file-title-content {
     color: $file-color $IMP;
