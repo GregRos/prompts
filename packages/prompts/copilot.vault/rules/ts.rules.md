@@ -3,4 +3,6 @@ applyTo: ${TS_FILES}
 aliases:
   - rules ts
 ---
-# ((Global TypeScript Rules Index))
+![[1.ts.rules]]
+![[2.annotate.rules]]
+![[3.declarations.rules]]

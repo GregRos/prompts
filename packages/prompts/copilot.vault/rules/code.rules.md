@@ -3,4 +3,4 @@ aliases:
   - rules code
 applyTo: ${CODE_FILES}
 ---
-# ((Global Coding Rules Index))
+![[1.code.rules]]

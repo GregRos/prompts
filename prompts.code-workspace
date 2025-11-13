@@ -22,7 +22,7 @@
         "typescript.suggest.includeCompletionsForImportStatements": true,
         "typescript.updateImportsOnFileMove.enabled": "always",
         "typescript.preferences.preferTypeOnlyAutoImports": false,
-        "python.languageServer": "None",
+        "python.languageServer": "Pylance",
         "files.associations": {
             "*.rules.md": "instructions",
             "**/*.rules/_.md": "instructions",
