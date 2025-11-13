@@ -65,7 +65,7 @@ $_weights: (
     }
 }
 .nav-file-title-content {
-    margin-left: -25p $IMP;
+    margin-left: -25px $IMP;
 }
 .tree-item-children {
     margin-left: 20px $IMP;
@@ -90,10 +90,14 @@ $_weights: (
     margin-top: -2px;
     margin-inline-start: calc(-1 * var(--size-4-5) * 1.4) $IMP;
     width: $size $IMP;
-    &.is-collapsed {
+    &.is-collapsed.is-collapsed {
         @include icons.before_icon($img_folder-closed, $size);
     }
-    &:not(.is-collapsed) {
+    @at-root .only-has-folder-note > .tree-item-self.has-folder-note & {
+        filter: none $IMP;
+        @include icons.before_icon($img_folder-picture, $size);
+    }
+    @at-root .tree-item-self &:not(.is-collapsed) {
         filter: hue-rotate(190deg) $IMP;
         @include icons.before_icon($img_folder-open, $size);
     }
