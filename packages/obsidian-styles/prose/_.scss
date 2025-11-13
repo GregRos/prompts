@@ -2,7 +2,7 @@
 @use "../tabs/" as tabs;
 @forward "./headings.scss";
 @forward "./title.scss";
-
+@forward "./embed.scss";
 .markdown-embed[src$=".sec"] {
     & > .embed-title {
         font-size: 1.5em;
